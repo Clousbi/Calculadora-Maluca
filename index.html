@@ -106,9 +106,17 @@
             var ponto = document.getElementById('pontos');
             ponto.style.display = "block";
             var igual = document.getElementById('igualtecla');
-            igual.addEventListener('click', function (){
-                calculateM();
-            });
+            igual.addEventListener('click', function () {
+                    resultado = parseInt(document.getElementById('resultado').value);
+                    if (valor == (resultado)) {
+                        pontuacao();
+                        calculateM();
+                    }
+                    else {
+                        finalizacao(1);
+                    }
+                    document.getElementById('resultado').value = "";
+                });
         }
         //
         function calculateM(){
@@ -121,61 +129,25 @@
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " + " + segundo;
                 //
-                igual.addEventListener('click', function () {
-                    resultado = parseInt(document.getElementById('resultado').value);
-                    if (valor == (resultado)) {
-                        pontuacao();
-                    }
-                    else {
-                        finalizacao(1);
-                    }
-                    document.getElementById('resultado').value = "";
-                });
+                
             } else if (operacaoNum == 2) {
                 valor = primeiro - segundo;
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " - " + segundo;
                 //
-                igual.addEventListener('click', function () {
-                    resultado = parseInt(document.getElementById('resultado').value);
-                    if (valor == (resultado)) {
-                        pontuacao();
-                    }
-                    else {
-                        finalizacao(1);
-                    }
-                    document.getElementById('resultado').value = "";
-                });
+                
             } else if (operacaoNum == 3) {
                 valor = primeiro * segundo;
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " * " + segundo;
                 //
-                igual.addEventListener('click', function () {
-                    resultado = parseInt(document.getElementById('resultado').value);
-                    if (valor == (resultado)) {
-                        pontuacao();
-                    }
-                    else {
-                        finalizacao(1);
-                    }
-                    document.getElementById('resultado').value = "";
-                });
+                
             } else {
                 valor = primeiro / segundo;
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " / " + segundo;
                 //
-                igual.addEventListener('click', function () {
-                    resultado = parseInt(document.getElementById('resultado').value);
-                    if (valor == (resultado)) {
-                        pontuacao();
-                    }
-                    else {
-                        finalizacao(1);
-                    }
-                    document.getElementById('resultado').value = "";
-                });
+                
             }
         }
         //
@@ -204,8 +176,10 @@
             var pontoFinal = document.getElementById('pontos').value;
             if(tipo == 0){
                 alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal);
+                window.location.reload(true);
             }else{
                 alert('Resposta errada, sua pontuação foi: ' + pontoFinal);
+                window.location.reload(true);
             }
         }
         //
