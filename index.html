@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,13 +12,11 @@
     <link rel="stylesheet" href="style.css">
     <title>Calculadora</title>
 </head>
-
 <body>
     <div class="content">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-
                     <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado">
                     <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
                     <input type="text" id="pontos" style="display: none">
@@ -58,14 +55,11 @@
                     <button class="calM" onclick="teste()">Calculadora Maluca</button>
                     <button class="voltar" id="voltar" onclick="voltar()" style="display: none">Voltar</button>
                     <span id="timer"></span>
-
                 </div>
             </div>
         </div>
     </div>
-
     <script>
-
         //calculadora normal
         function insert(num) { //aparece o número na tabela
             var numero = document.getElementById('resultado').value;
@@ -94,13 +88,13 @@
         //
         //
         //calculadora maluca
-
-
-
-
-        function teste() {
+        var resultado;
+        var valor = 0;
+        var interval;
+        function teste(){
             clean();
             calculateM();
+            configTimer();
             document.getElementById('pontos').value = '0';
             //
             var bloco = document.getElementById('operacaoJogo');
@@ -111,19 +105,13 @@
             placar.style.display = "contents";
             var ponto = document.getElementById('pontos');
             ponto.style.display = "block";
-            configTimer()
-
             var igual = document.getElementById('igualtecla');
-            igual.addEventListener('click', function () {
+            igual.addEventListener('click', function (){
                 calculateM();
             });
-
-
         }
         //
-        var resultado;
-        var valor = 0;
-        function calculateM() {
+        function calculateM(){
             var primeiro = numeroOperacao();
             var segundo = numeroOperacao();
             var operacaoNum = operacao();
@@ -133,71 +121,63 @@
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " + " + segundo;
                 //
-
                 igual.addEventListener('click', function () {
                     resultado = parseInt(document.getElementById('resultado').value);
-
                     if (valor == (resultado)) {
                         pontuacao();
                     }
                     else {
-
+                        finalizacao(1);
                     }
                     document.getElementById('resultado').value = "";
                 });
-
             } else if (operacaoNum == 2) {
                 valor = primeiro - segundo;
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " - " + segundo;
                 //
-
                 igual.addEventListener('click', function () {
                     resultado = parseInt(document.getElementById('resultado').value);
-
                     if (valor == (resultado)) {
                         pontuacao();
                     }
+                    else {
+                        finalizacao(1);
+                    }
                     document.getElementById('resultado').value = "";
                 });
-
             } else if (operacaoNum == 3) {
                 valor = primeiro * segundo;
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " * " + segundo;
                 //
-
                 igual.addEventListener('click', function () {
                     resultado = parseInt(document.getElementById('resultado').value);
-
                     if (valor == (resultado)) {
                         pontuacao();
-
-
+                    }
+                    else {
+                        finalizacao(1);
                     }
                     document.getElementById('resultado').value = "";
                 });
-
             } else {
                 valor = primeiro / segundo;
                 document.getElementById('comparador').value = valor;
                 document.getElementById('operacaoJogo').value = primeiro + " / " + segundo;
                 //
-
                 igual.addEventListener('click', function () {
                     resultado = parseInt(document.getElementById('resultado').value);
-
                     if (valor == (resultado)) {
                         pontuacao();
-
-
+                    }
+                    else {
+                        finalizacao(1);
                     }
                     document.getElementById('resultado').value = "";
                 });
-
             }
         }
-
         //
         function voltar() {
             var volta = document.getElementById('voltar');
@@ -216,16 +196,22 @@
             var ponto = parseInt(document.getElementById('pontos').value);
             ponto++;
             document.getElementById('pontos').value = ponto;
+            clearInterval(interval);
             configTimer();
         }
         //
-        function finalizacao() {
-
-
+        function finalizacao(tipo){
+            var pontoFinal = document.getElementById('pontos').value;
+            if(tipo == 0){
+                alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal);
+            }else{
+                alert('Resposta errada, sua pontuação foi: ' + pontoFinal);
+            }
         }
+        //
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
-            setInterval(function () {
+            interval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
                 minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -233,15 +219,18 @@
                 display.textContent = minutes + ":" + seconds;
                 if (--timer < 0) {
                     timer = duration;
+                    display.style.display = 'none';
+                    finalizacao(0);
                 }
             }, 1000);
         }
+        //
         function configTimer() {
             var duration = 60 * 3; // Converter para segundos
             display = document.querySelector('#timer'); // selecionando o timer
             startTimer(duration, display); // iniciando o timer
         };
-
+        //
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
