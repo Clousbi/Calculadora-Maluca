@@ -76,10 +76,7 @@ text-align: right;
 padding: 4px;
 font-size: 4mm;
 }
-p{
-display: flex;
-flex-direction: row;
-text-align: center;
-color: #ffffff;
-height: 10mm;
+.pontosDiv{
+    display: flex;
+    align-items: baseline;
 }

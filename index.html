@@ -18,9 +18,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
                     <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado">
-                    <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
-                    <input type="text" id="pontos" style="display: none">
-                    <input type="text" id="comparador" style="display: none">
+                    <input type="text" id="comparador">
                     <input type="text" id="operacaoJogo" style="display: none">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
@@ -30,21 +28,21 @@
                     <button class="op" onclick="insert('*')">x</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero" onclick="insert('7')">7</button>
-                    <button class="n" id="numero" onclick="insert('8')">8</button>
-                    <button class="n" id="numero" onclick="insert('9')">9</button>
+                    <button class="n" id="numero_7" onclick="insert('7')">7</button>
+                    <button class="n" id="numero_8" onclick="insert('8')">8</button>
+                    <button class="n" id="numero_9" onclick="insert('9')">9</button>
                     <button class="op" onclick="insert('-')">-</button>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12"> <!-- mudar os id -->
-                    <button class="n" id="numero" onclick="insert('4')">4</button>
-                    <button class="n" id="numero" onclick="insert('5')">5</button>
-                    <button class="n" id="numero" onclick="insert('6')">6</button>
+                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                    <button class="n" id="numero_4" onclick="insert('4')">4</button>
+                    <button class="n" id="numero_5" onclick="insert('5')">5</button>
+                    <button class="n" id="numero_6" onclick="insert('6')">6</button>
                     <button class="op" onclick="insert('+')">+</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero" onclick="insert('1')">1</button>
-                    <button class="n" id="numero" onclick="insert('2')">2</button>
-                    <button class="n" id="numero" onclick="insert('3')">3</button>
+                    <button class="n" id="numero_1" onclick="insert('1')">1</button>
+                    <button class="n" id="numero_2" onclick="insert('2')">2</button>
+                    <button class="n" id="numero_3" onclick="insert('3')">3</button>
                     <button class="op" id="igualtecla" onclick="result('=')">=</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
@@ -52,160 +50,18 @@
                     <button class="op" onclick="insert('.')">.</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="calM" onclick="teste()">Calculadora Maluca</button>
+                    <button class="calM" id="calM" onclick="telaJogo()">Calculadora Maluca</button>
+                    <div class="pontosDiv">
+                        <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
+                        <input type="text" id="pontos" style="display: none">
+                    </div>
                     <button class="voltar" id="voltar" onclick="voltar()" style="display: none">Voltar</button>
                     <span id="timer"></span>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        //calculadora normal
-        function insert(num) { //aparece o número na tabela
-            var numero = document.getElementById('resultado').value;
-            document.getElementById('resultado').value = numero + num;
-        }
-        //
-        function clean() { // limpa a operação inteira
-            document.getElementById('resultado').value = " ";
-            document.getElementById('operacaoJogo').value = " ";
-        }
-        //
-        function backspace() { // limpa somente um número
-            var resultado = document.getElementById('resultado').value;
-            document.getElementById('resultado').value = resultado.substring(0, resultado.length - 1);
-        }
-        //
-        function result() {//função da operação 
-            var resultado = document.getElementById('resultado').value;
-            if (resultado) {
-                document.getElementById('resultado').value = eval(resultado);
-            } else {
-                document.getElementById('resultado').value = "Não definido";
-            }
-        }
-        //
-        //
-        //
-        //calculadora maluca
-        var resultado;
-        var valor = 0;
-        var interval;
-        function teste(){
-            clean();
-            calculateM();
-            configTimer();
-            document.getElementById('pontos').value = '0';
-            //
-            var bloco = document.getElementById('operacaoJogo');
-            bloco.style.display = "block";
-            var volta = document.getElementById('voltar');
-            volta.style.display = "block";
-            var placar = document.getElementById('pontosJogo');
-            placar.style.display = "contents";
-            var ponto = document.getElementById('pontos');
-            ponto.style.display = "block";
-            var igual = document.getElementById('igualtecla');
-            igual.addEventListener('click', function () {
-                    resultado = parseInt(document.getElementById('resultado').value);
-                    if (valor == (resultado)) {
-                        pontuacao();
-                        calculateM();
-                    }
-                    else {
-                        finalizacao(1);
-                    }
-                    document.getElementById('resultado').value = "";
-                });
-        }
-        //
-        function calculateM(){
-            var primeiro = numeroOperacao();
-            var segundo = numeroOperacao();
-            var operacaoNum = operacao();
-            var igual = document.getElementById('igualtecla');
-            if (operacaoNum == 1) {
-                valor = primeiro + segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " + " + segundo;
-                //
-                
-            } else if (operacaoNum == 2) {
-                valor = primeiro - segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " - " + segundo;
-                //
-                
-            } else if (operacaoNum == 3) {
-                valor = primeiro * segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " * " + segundo;
-                //
-                
-            } else {
-                valor = primeiro / segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " / " + segundo;
-                //
-                
-            }
-        }
-        //
-        function voltar() {
-            var volta = document.getElementById('voltar');
-            volta.addEventListener('click', document.location.reload(true));
-        }
-        //
-        function numeroOperacao() { // randoniza de 0 a 10
-            return Math.floor(Math.random() * 10);
-        }
-        //
-        function operacao() { // randoniza de 1 a 4
-            return Math.floor(Math.random() * 4 + 1);
-        }
-        //
-        function pontuacao() {
-            var ponto = parseInt(document.getElementById('pontos').value);
-            ponto++;
-            document.getElementById('pontos').value = ponto;
-            clearInterval(interval);
-            configTimer();
-        }
-        //
-        function finalizacao(tipo){
-            var pontoFinal = document.getElementById('pontos').value;
-            if(tipo == 0){
-                alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal);
-                window.location.reload(true);
-            }else{
-                alert('Resposta errada, sua pontuação foi: ' + pontoFinal);
-                window.location.reload(true);
-            }
-        }
-        //
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            interval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                display.textContent = minutes + ":" + seconds;
-                if (--timer < 0) {
-                    timer = duration;
-                    display.style.display = 'none';
-                    finalizacao(0);
-                }
-            }, 1000);
-        }
-        //
-        function configTimer() {
-            var duration = 60 * 3; // Converter para segundos
-            display = document.querySelector('#timer'); // selecionando o timer
-            startTimer(duration, display); // iniciando o timer
-        };
-        //
-    </script>
+    <script src="script.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
@@ -213,5 +69,4 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
