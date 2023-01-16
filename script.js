@@ -39,6 +39,10 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
     //
     var bloco = document.getElementById('operacaoJogo'); // aparece o input bloco
     bloco.style.display = "block";
+    var tabela1 = document.getElementById('tabela1'); // aparece a tabela 1
+    tabela1.style.display = "block";
+    var tabela2 = document.getElementById('tabela2'); // aparece a tabela 2
+    tabela2.style.display = "block";
     var volta = document.getElementById('voltar'); // aparece o botão de voltar
     volta.style.display = "block";
     var placar = document.getElementById('pontosJogo'); // aparece o "pontos"
@@ -63,7 +67,6 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
                 else{
                     calculateM(100);// chama o calculo de novo
                 }
-                console.log();
             }
             else { // se não forem iguais
                 finalizacao(1); // finaliza com os pontos adquiridos
@@ -106,7 +109,7 @@ function voltar() { //função do botão de voltar
 }
 //
 function numeroOperacao(num_random) { // randoniza 
-    return Math.floor(Math.random() * num_random);
+    return Math.floor(Math.random() * num_random + 1);
 }
 //
 function operacao() { // randoniza de 1 a 4
@@ -154,3 +157,4 @@ function configTimer() {
     startTimer(duration, display); // iniciando o timer
 };
 //
+
