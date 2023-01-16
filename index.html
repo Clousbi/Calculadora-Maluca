@@ -9,54 +9,75 @@
     <link
         href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&family=Raleway:ital,wght@0,300;1,400;1,500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <title>Calculadora</title>
 </head>
-<body>
+<body class="bg-secondary mt-1" style="font-family:'Raleway', sans-serif, 'League Spartan', sans-serif;">
     <div class="content">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado">
+                    <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 150px;">
                     <input type="text" id="comparador">
-                    <input type="text" id="operacaoJogo" style="display: none">
+                    <input type="text" id="operacaoJogo" style="display: none; width: 150px;" class="bg-light border input-sm rounded mt-1">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="op" onclick="clean('C')">C</button>
-                    <button class="op" onclick="backspace('<')"><</button>
-                    <button class="op" onclick="insert('/')">/</button>
-                    <button class="op" onclick="insert('*')">x</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="clear" onclick="clean('C')">c</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="apaga" onclick="backspace('<')"><</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="divisao" onclick="insert('/')">/</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="multiplicacao" onclick="insert('*')">x</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero_7" onclick="insert('7')">7</button>
-                    <button class="n" id="numero_8" onclick="insert('8')">8</button>
-                    <button class="n" id="numero_9" onclick="insert('9')">9</button>
-                    <button class="op" onclick="insert('-')">-</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_7" onclick="insert('7')">7</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_8" onclick="insert('8')">8</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_9" onclick="insert('9')">9</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="subtracao" onclick="insert('-')">-</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero_4" onclick="insert('4')">4</button>
-                    <button class="n" id="numero_5" onclick="insert('5')">5</button>
-                    <button class="n" id="numero_6" onclick="insert('6')">6</button>
-                    <button class="op" onclick="insert('+')">+</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_4" onclick="insert('4')">4</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_5" onclick="insert('5')">5</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_6" onclick="insert('6')">6</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="soma" onclick="insert('+')">+</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero_1" onclick="insert('1')">1</button>
-                    <button class="n" id="numero_2" onclick="insert('2')">2</button>
-                    <button class="n" id="numero_3" onclick="insert('3')">3</button>
-                    <button class="op" id="igualtecla" onclick="result('=')">=</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_1" onclick="insert('1')">1</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_2" onclick="insert('2')">2</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_3" onclick="insert('3')">3</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="igualtecla" onclick="result('=')">=</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" style="width: 26mm;" onclick="insert('0')">0</button>
-                    <button class="op" onclick="insert('.')">.</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" onclick="insert('0')">0</button>
+                    <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="ponto" onclick="insert('.')">.</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="calM" id="calM" onclick="telaJogo()">Calculadora Maluca</button>
-                    <div class="pontosDiv">
-                        <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
-                        <input type="text" id="pontos" style="display: none">
+                    <button type="button" class="btn btn-light mt-1" id="calM" onclick="telaJogo()" style="font-size: 12px; width: 150px;">Calculadora Maluca</button>
+                    <div class="d-flex p-2 align-items-baseline">
+                        <label for="pontos" id="pontosJogo" style="display: none; ">Pontos:</label>
+                        <input type="text" id="pontos" style="display: none; width: 90px;" class="bg-light border input-sm rounded mt-1">
                     </div>
-                    <button class="voltar" id="voltar" onclick="voltar()" style="display: none">Voltar</button>
+                    <button type="button" class="btn btn-light mt-2" id="voltar" onclick="voltar()" style="display: none; font-size: 12px; width: 150px;">Voltar</button>
                     <span id="timer"></span>
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Launch demo modal </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
