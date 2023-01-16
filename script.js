@@ -28,12 +28,14 @@ function result() {//função da operação
 //calculadora maluca
 var resultado;
 var valor = 0; // valor da operação da calculadora 
+var decimal;
 var interval; //usado na função do cronometro
+//
 function telaJogo(){ // quando é acionado o jogo, aparece essa função
     clean(); // limpa o input 'resultado'
-    calculateM(); // chama a função de calcular a operação do jogo
+    calculateM(10); // chama a função de calcular a operação do jogo
     configTimer(); // chama o cronometro
-    document.getElementById('pontos').value = '0'; // os pontos tem o valor de 0 (do input)
+    var pontos_valor = document.getElementById('pontos').value = '0'; // os pontos tem o valor de 0 (do input)
     //
     var bloco = document.getElementById('operacaoJogo'); // aparece o input bloco
     bloco.style.display = "block";
@@ -45,12 +47,23 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
     ponto.style.display = "block";
     var btnCalM = document.getElementById('calM'); // some o botão de "calculadora maluca"
     btnCalM.style.display = "none";
+//
     var igual = document.getElementById('igualtecla'); // cria uma variavel que tem o valor da tecla igual
     igual.addEventListener('click', function () { // ao clicar na tecla igual, aciona a função
-            resultado = parseFloat(document.getElementById('resultado').value); // o resultado que está no input, vira inteiro
-            if (valor == (resultado)) { // se o valor que está no comparador é igual ao do resultado
+            resultado = parseFloat(document.getElementById('resultado').value);
+            resultado // o resultado que está no input, vira inteiro
+            if (valor == (resultado) || decimal == (resultado)) { // se o valor que está no comparador é igual ao do resultado
                 pontuacao(); // a pontucação aumenta
-                calculateM(); // chama o calculo de novo
+                pontos_valor++;
+                if (pontos_valor <= 10){
+                    calculateM(10); // chama o calculo de novo
+                }else if(pontos_valor > 10 && pontos_valor <= 20){
+                    calculateM(30); // chama o calculo de novo
+                }
+                else{
+                    calculateM(100);// chama o calculo de novo
+                }
+                console.log();
             }
             else { // se não forem iguais
                 finalizacao(1); // finaliza com os pontos adquiridos
@@ -59,9 +72,9 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
         });
 }
 //
-function calculateM(){ // função que calcula a operação
-    var primeiro = numeroOperacao(); //primeiro valor a ser calculado (chama a função de aleatoriedade)
-    var segundo = numeroOperacao(); //segundovalor a ser calculado (chama a função de aleatoriedade)
+function calculateM(operador){ // função que calcula a operação
+    var primeiro = numeroOperacao(operador); //primeiro valor a ser calculado (chama a função de aleatoriedade)
+    var segundo = numeroOperacao(operador); //segundovalor a ser calculado (chama a função de aleatoriedade)
     var operacaoNum = operacao(); // a operação (chama a função de aleatoriedade)
     if (operacaoNum == 1) { // se o número der 1
         valor = primeiro + segundo; // os valores são somados
@@ -80,7 +93,8 @@ function calculateM(){ // função que calcula a operação
         // 
     } else { // se o número der 4
         valor = primeiro / segundo; // os valores são divididos
-        document.getElementById('comparador').value = valor; // o valor somado é mostrado no comparador
+        decimal = valor.toFixed(2);
+        document.getElementById('comparador').value = decimal; // o valor somado é mostrado no comparador
         document.getElementById('operacaoJogo').value = primeiro + " / " + segundo; // o valor dividido é mostrado no input
         //
     }
@@ -91,8 +105,8 @@ function voltar() { //função do botão de voltar
     volta.addEventListener('click', document.location.reload(true)); // ao clicar o botão reinicia o site
 }
 //
-function numeroOperacao() { // randoniza de 0 a 10
-    return Math.floor(Math.random() * 10);
+function numeroOperacao(num_random) { // randoniza 
+    return Math.floor(Math.random() * num_random);
 }
 //
 function operacao() { // randoniza de 1 a 4
