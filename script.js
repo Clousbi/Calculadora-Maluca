@@ -310,4 +310,7 @@ function sistemNivel(pontos_valor){
         calculateMImpossivel(100);
     }
 }
+function historico(){
+    
+}
 
