@@ -15,20 +15,28 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <span id="timer" class="badge badge-danger"></span>
+                <span id="timer" class="badge"></span>
                 <div class="calculadora" style="margin: 30px; text-align: center; margin-left: 150px;">
-                    <div class="d-flex flex-row justify-content-center">
-                        <div style="margin-right:5px;display: none;" id="vida1"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
-                        <div style="margin-right:5px; display: none;" id="vida2"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
-                        <div style="margin-right:25px; display: none;" id="vida3"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
-                    </div>
                     <div style="display: none;" id="cv1"><img src="coracaoVazio.svg" alt="coracaoVazio"></div> 
                     <div style="display: none;" id="cv2"><img src="coracaoVazio.svg" alt="coracaoVazio"></div> 
                     <div style="display: none;" id="cv3"><img src="coracaoVazio.svg" alt="coracaoVazio"></div> 
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                        <div class="d-flex flex-row justify-content-center">
+                            <div>
+                                <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
+                            </div>
+                            <div style="margin-right:100px;">
+                                <div id="pontos" style="display: none; width: 90px;"></div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center">
+                                <div style="margin-right:5px;display: none;" id="vida1"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
+                                <div style="margin-right:5px; display: none;" id="vida2"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
+                                <div style="margin-right:25px; display: none;" id="vida3"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
+                            </div>
+                        </div>
                         <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 365px;">
                         <input type="text" id="comparador" style="display: none;">
-                        <input type="text" id="operacaoJogo" style="display: none; width: 365px; margin-left: 130px;" class="bg-light border input-sm rounded mt-1">
+                        <input type="text" id="operacaoJogo" style="display: none; width: 365px; margin-left: 190px;" class="bg-light border input-sm rounded mt-1">
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
                         <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="clear" style="width: 70px;" onclick="clean('C')">c</button>
@@ -72,15 +80,15 @@
                         <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="sin" style="width: 70px;" onclick="sin()">sin</button>
                         <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="tan" style="width: 70px;" onclick="tan()">tan</button>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light mt-1" id="calM" onclick="telaJogo()" style="font-size: 12px; width: 365px;">Calculadora Maluca</button>
-                        <div class="d-flex p-2 align-items-baseline">
-                            <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
-                            <input type="text" id="pontos" style="display: none; width: 90px;" class="bg-light border input-sm rounded mt-1">
+                    <div class="d-flex flex-row justify-content-center" style="margin-right: 373px;">
+                        <div>
+                            <button type="button" class="btn btn-light mt-1" id="calM" onclick="telaJogo()" style="font-size: 12px; width: 365px;">Calculadora Maluca</button>
                         </div>
-                        <button type="button" class="btn btn-light mt-2" id="voltar" onclick="voltar()" style="display: none; font-size: 12px; width: 150px;">Voltar</button>
-                        
+                        <div>
+                            <button type="button" class="btn btn-light mt-2" id="voltar" onclick="voltar()" style="display: none; font-size: 12px; width: 365px;">Voltar</button>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="d-flex flex-row justify-content-center">
@@ -93,9 +101,9 @@
                                 <th scope="col">Sua Resposta</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="opJogoTab2" style="width: 150px;" class="bg-light border input-sm rounded mt-1"></td>
-                                <td><input type="text" id="compTab2" style="width: 150px;" class="bg-light border input-sm rounded mt-1"></td>
-                                <td> <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 150px;"></td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
                             </tr>
                         </tbody>
                     </table>
@@ -109,9 +117,9 @@
                                 <th scope="col">Sua Resposta</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="opJogoTab2" style="width: 150px;" class="bg-light border input-sm rounded mt-1"></td>
-                                <td><input type="text" id="compTab2" style="width: 150px;" class="bg-light border input-sm rounded mt-1"></td>
-                                <td> <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 150px;"></td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
                             </tr>
                         </tbody>
                     </table>
