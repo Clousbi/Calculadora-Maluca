@@ -103,53 +103,124 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
     var btnCalM = document.getElementById('calM'); // some o botão de "calculadora maluca"
     btnCalM.style.display = "none";
 //
-    var igual = document.getElementById('igualtecla'); // cria uma variavel que tem o valor da tecla igual
-    igual.addEventListener('click', function () { // ao clicar na tecla igual, aciona a função
+    var igual = document.getElementById('igualtecla'); 
+    igual.addEventListener('click', function () { 
             resultado = parseFloat(document.getElementById('resultado').value);
-            resultado // o resultado que está no input, vira inteiro
-            if (valor == (resultado) || decimal == (resultado)) { // se o valor que está no comparador é igual ao do resultado
-                pontuacao(); // a pontucação aumenta
+            resultado 
+            if (valor == (resultado) || decimal == (resultado)) { 
+                pontuacao(); 
                 pontos_valor++;
                 if (pontos_valor <= 10){
-                    calculateM(10); // chama o calculo de novo
+                    calculateM(10);
                 }else if(pontos_valor > 10 && pontos_valor <= 20){
-                    calculateM(30); // chama o calculo de novo
+                    calculateMMedioDificil(10); 
                 }
-                else{
-                    calculateM(100);// chama o calculo de novo
+                else if(pontos_valor > 20 && pontos_valor <= 50){
+                    calculateMMedioDificil(30);
+                }else{
+                    calculateMImpossivel(100);
                 }
             }
-            else { // se não forem iguais
-                finalizacao(1); // finaliza com os pontos adquiridos
+            else { 
+                finalizacao(1); 
             }
-            document.getElementById('resultado').value = ""; // o input do resultado "limpa"
+            document.getElementById('resultado').value = ""; 
         });
 }
 //
-function calculateM(operador){ // função que calcula a operação
-    var primeiro = numeroOperacao(operador); //primeiro valor a ser calculado (chama a função de aleatoriedade)
-    var segundo = numeroOperacao(operador); //segundovalor a ser calculado (chama a função de aleatoriedade)
-    var operacaoNum = operacao(); // a operação (chama a função de aleatoriedade)
-    if (operacaoNum == 1) { // se o número der 1
-        valor = primeiro + segundo; // os valores são somados
-        document.getElementById('comparador').value = valor; // o valor somado é mostrado no comparador
-        document.getElementById('operacaoJogo').value = primeiro + " + " + segundo; // o valor somado é mostrado no input
+function calculateM(operador){ 
+    var primeiro = numeroOperacao(operador);
+    var segundo = numeroOperacao(operador);
+    var operacaoNum = operacao(); 
+    if (operacaoNum == 1) { 
+        valor = primeiro + segundo; 
+        document.getElementById('comparador').value = valor;
+        document.getElementById('operacaoJogo').value = primeiro + " + " + segundo; 
         //
-    } else if (operacaoNum == 2) { // se o número der 2
-        valor = primeiro - segundo; // os valores são subtraidos
-        document.getElementById('comparador').value = valor; // o valor somado é mostrado no comparador
-        document.getElementById('operacaoJogo').value = primeiro + " - " + segundo; // o valor subtraido é mostrado no input
+    } else if (operacaoNum == 2) { 
+        valor = primeiro - segundo; 
+        document.getElementById('comparador').value = valor;
+        document.getElementById('operacaoJogo').value = primeiro + " - " + segundo; 
         //
-    } else if (operacaoNum == 3) { // se o número der 3
-        valor = primeiro * segundo; // os valores são multiplicados
-        document.getElementById('comparador').value = valor; // o valor somado é mostrado no comparador
-        document.getElementById('operacaoJogo').value = primeiro + " * " + segundo; // o valor multiplicado é mostrado no input
+    } else if (operacaoNum == 3) { 
+        valor = primeiro * segundo; 
+        document.getElementById('comparador').value = valor; 
+        document.getElementById('operacaoJogo').value = primeiro + " * " + segundo;
         // 
-    } else { // se o número der 4
-        valor = primeiro / segundo; // os valores são divididos
+    } else { 
+        valor = primeiro / segundo; 
         decimal = valor.toFixed(2);
-        document.getElementById('comparador').value = decimal; // o valor somado é mostrado no comparador
-        document.getElementById('operacaoJogo').value = primeiro + " / " + segundo; // o valor dividido é mostrado no input
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = primeiro + " / " + segundo; 
+        //
+    }
+}
+//
+function calculateMMedioDificil(operador){ 
+    var pri = numeroOperacao(operador); 
+    var seg = numeroOperacao(operador); 
+    var ter = numeroOperacao(operador);
+    var qua = numeroOperacao(operador);
+    var operacaoNum = operacao(); 
+    if (operacaoNum == 1) { 
+        valor = pri * (seg + ter) / qua; 
+        decimal = valor.toFixed(2);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = pri + " * " + " ( " + seg + " + " + ter + " ) " + " / " + qua; 
+        //
+    } else if (operacaoNum == 2) {
+        valor = pri / (seg * ter) + qua;
+        decimal = valor.toFixed(2);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = pri + " / " + " ( " + seg + " * " + ter + " ) " + " + " + qua; 
+        //
+    } else if (operacaoNum == 3) { 
+        valor = pri - (seg / ter) * qua; 
+        decimal = valor.toFixed(2);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = pri + " - " + " ( " + seg + " / " + ter + " ) " + " * " + qua; 
+        // 
+    } else { 
+        valor = pri + (seg - ter) - qua; 
+        decimal = valor.toFixed(2);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = pri + " + " + " ( " + seg + " - " + ter + " ) " + " - " + qua; 
+        //
+    }
+}
+//
+function calculateMImpossivel(operador){ 
+    var pri = numeroOperacao(operador); 
+    var seg = numeroOperacao(operador); 
+    var ter = numeroOperacao(operador);
+    var qua = numeroOperacao(operador);
+    var qui = numeroOperacao(operador);
+    var sex = numeroOperacao(operador);
+    var set = numeroOperacao(operador); 
+    var operacaoNum = operacao(); 
+    if (operacaoNum == 1) { 
+        valor = (pri * (seg + ter) / qua - qui) + sex / set; 
+        decimal = valor.toFixed(3);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = " ( " + pri + " * ( " + seg + " + " + ter + " ) / " + qua + " - " + qui + " ) + " + sex + " / " + set; 
+        //
+    } else if (operacaoNum == 2) { 
+        valor = (((pri + seg / ter ) * (qua - qui) / sex) + set); 
+        decimal = valor.toFixed(3);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " + " + seg + " / " + ter + " ) * ( " + qua + " - " + qui + " ) / " + sex + " ) + " + set + " ) ";
+        //
+    } else if (operacaoNum == 3) { 
+        valor = pri / seg - ter * (qua - qui) * (sex - set); 
+        decimal = valor.toFixed(3);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = pri + " / " + seg + " - " + ter + " * ( " + qua + " - " + qui + " ) * ( " + sex + " - " + set + " ) "; 
+        // 
+    } else { 
+        valor = (((pri - seg) / (ter * qua)) / qui + sex) * set; 
+        decimal = valor.toFixed(3);
+        document.getElementById('comparador').value = decimal; 
+        document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " - " +  seg + " ) / ( " + ter + " * " + qua + " ) ) / " + qui + " + " + sex + ") * " + set; 
         //
     }
 }
