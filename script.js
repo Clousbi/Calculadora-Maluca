@@ -81,6 +81,10 @@ var resultado;
 var valor = 0; // valor da operação da calculadora 
 var decimal;
 var interval; //usado na função do cronometro
+var vida1 = document.getElementById('vida1');
+var vida2 = document.getElementById('vida2');
+var vida3 = document.getElementById('vida3');
+var i = 3;
 //
 function telaJogo(){ // quando é acionado o jogo, aparece essa função
     clean(); // limpa o input 'resultado'
@@ -102,6 +106,12 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
     ponto.style.display = "block";
     var btnCalM = document.getElementById('calM'); // some o botão de "calculadora maluca"
     btnCalM.style.display = "none";
+    var vida1 = document.getElementById('vida1');
+    vida1.style.display = "block";
+    var vida2 = document.getElementById('vida2');
+    vida2.style.display = "block";
+    var vida3 = document.getElementById('vida3');
+    vida3.style.display = "block";
 //
     var igual = document.getElementById('igualtecla'); 
     igual.addEventListener('click', function () { 
@@ -122,7 +132,24 @@ function telaJogo(){ // quando é acionado o jogo, aparece essa função
                 }
             }
             else { 
-                finalizacao(1); 
+                
+                if (i == 3){
+                    vida1.innerHTML = document.getElementById('cv1').innerHTML;
+                    vida1.value = document.getElementById('cv1').value;
+                    i--;
+                    calculateM(10);
+                }else if (i == 2){
+                    vida2.innerHTML = document.getElementById('cv2').innerHTML;
+                    vida2.value = document.getElementById('cv2').value;
+                    i--;
+                    calculateM(10);
+                }else if (i == 1){
+                    vida3.innerHTML = document.getElementById('cv3').innerHTML;
+                    vida3.value = document.getElementById('cv3').value;
+                    i--;
+                    finalizacao(1);
+                }
+                
             }
             document.getElementById('resultado').value = ""; 
         });
@@ -252,7 +279,7 @@ function finalizacao(tipo){ // função de fim de jogo
         alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal); // alerta para o jogador que terminou o jogo
         window.location.reload(true); // reinicia o site
     }else{ // se o tipo for 1, é fim de jogo por erro de resposta
-        alert('Resposta errada, sua pontuação foi: ' + pontoFinal); // alerta para o jogador que terminou o jogo
+        alert('Suas vidas acabaram, sua pontuação foi: ' + pontoFinal); // alerta para o jogador que terminou o jogo
         window.location.reload(true); // reinicia o site
     }
 }
