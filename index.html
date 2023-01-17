@@ -15,52 +15,67 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="calculadora p-2">
+                <span id="timer" class="badge badge-danger"></span>
+                <div class="calculadora" style="margin: 30px; text-align: center; margin-left: 150px;">
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 150px;">
+                        <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 365px;">
                         <input type="text" id="comparador" style="display: none;">
-                        <input type="text" id="operacaoJogo" style="display: none; width: 150px;" class="bg-light border input-sm rounded mt-1">
+                        <input type="text" id="operacaoJogo" style="display: none; width: 365px; margin-left: 130px;" class="bg-light border input-sm rounded mt-1">
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="clear" onclick="clean('C')">c</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="apaga" onclick="backspace('<')"><</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="divisao" onclick="insert('/')">/</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="multiplicacao" onclick="insert('*')">x</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="clear" style="width: 70px;" onclick="clean('C')">c</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="apaga" style="width: 70px;" onclick="backspace('<')"><</button>
+                        <button type="button" class="btn btn-warning d-inline p-2.5 mt-1" id="igualtecla" style="width: 70px;" onclick="result('=')">=</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="pi" style="width: 70px;" onclick="caractere(3.14159)">π</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="modulo" style="width: 70px;" onclick="modulo()">%</button>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_7" onclick="insert('7')">7</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_8" onclick="insert('8')">8</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_9" onclick="insert('9')">9</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="subtracao" onclick="insert('-')">-</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_7" style="width: 70px;" onclick="insert('7')">7</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_8" style="width: 70px;" onclick="insert('8')">8</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_9" style="width: 70px;" onclick="insert('9')">9</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="exp" style="width: 70px;" onclick="exp()">e^x</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="divisao" style="width: 70px;" onclick="insert('/')">/</button>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_4" onclick="insert('4')">4</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_5" onclick="insert('5')">5</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_6" onclick="insert('6')">6</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="soma" onclick="insert('+')">+</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_4" style="width: 70px;" onclick="insert('4')">4</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_5" style="width: 70px;" onclick="insert('5')">5</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_6" style="width: 70px;" onclick="insert('6')">6</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="logarit" style="width: 70px;" onclick="log()">log</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="multiplicacao" style="width: 70px;" onclick="insert('*')">x</button>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_1" onclick="insert('1')">1</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_2" onclick="insert('2')">2</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="numero_3" onclick="insert('3')">3</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="igualtecla" onclick="result('=')">=</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_1" style="width: 70px;" onclick="insert('1')">1</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_2" style="width: 70px;" onclick="insert('2')">2</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_3" style="width: 70px;" onclick="insert('3')">3</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="raiz" style="width: 70px;" onclick="sqrt()">√</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="subtracao" style="width: 70px;" onclick="insert('-')">-</button>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" onclick="insert('0')">0</button>
-                        <button type="button" class="btn btn-light d-inline p-2.5 mt-1" id="ponto" onclick="insert('.')">.</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="maisMenos"style="width: 70px;" onclick="alteraSinal()">±</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" style="width: 70px;" onclick="insert('0')">0</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="ponto" style="width: 70px;" onclick="insert('.')">.</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="aoQuadrado" style="width: 70px;" onclick="quadrado()">x²</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="soma" style="width: 70px;" onclick="insert('+')">+</button>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                        <button type="button" class="btn btn-light mt-1" id="calM" onclick="telaJogo()" style="font-size: 12px; width: 150px;">Calculadora Maluca</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="parenD" style="width: 70px;" onclick="caractere('(')">(</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="parenE" style="width: 70px;" onclick="caractere(')')">)</button>
+                        <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="cos" style="width: 70px;" onclick="cos()">cos</button>
+                        <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="sin" style="width: 70px;" onclick="sin()">sin</button>
+                        <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="tan" style="width: 70px;" onclick="tan()">tan</button>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                        <button type="button" class="btn btn-light mt-1" id="calM" onclick="telaJogo()" style="font-size: 12px; width: 365px;">Calculadora Maluca</button>
                         <div class="d-flex p-2 align-items-baseline">
-                            <label for="pontos" id="pontosJogo" style="display: none; ">Pontos:</label>
+                            <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
                             <input type="text" id="pontos" style="display: none; width: 90px;" class="bg-light border input-sm rounded mt-1">
                         </div>
                         <button type="button" class="btn btn-light mt-2" id="voltar" onclick="voltar()" style="display: none; font-size: 12px; width: 150px;">Voltar</button>
-                        <span id="timer"></span>
+                        
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-row justify-content-center">
                 <div class="table1 p-2" style="display: none;" id="tabela1">
                     <table class="table-sm">
                         <tbody>

@@ -1,4 +1,7 @@
 //calculadora normal
+var resultado = document.getElementById('resultado').value;
+var val = 0.0;
+//
 function insert(num) { //aparece o número na tabela
     var numero = document.getElementById('resultado').value;
     document.getElementById('resultado').value = numero + num;
@@ -22,6 +25,54 @@ function result() {//função da operação
         document.getElementById('resultado').value = "Não definido";
     }
 }
+//
+function caractere(caractere) {
+    if(document.getElementById('resultado').value == null || document.getElementById('resultado').value == "0")
+    document.getElementById('resultado').value = caractere;
+    else
+    document.getElementById('resultado').value += caractere;
+}
+//
+function cos(){
+    document.getElementById('resultado').value = Math.cos(document.getElementById('resultado').value);
+}
+//
+function sin(){
+    document.getElementById('resultado').value = Math.sin(document.getElementById('resultado').value);
+}
+//
+function tan(){
+    document.getElementById('resultado').value = Math.tan(document.getElementById('resultado').value);
+}
+//
+function sqrt(){
+    document.getElementById('resultado').value = Math.sqrt(document.getElementById('resultado').value);
+}
+//
+function log(){
+    document.getElementById('resultado').value = Math.log(document.getElementById('resultado').value);
+}
+//
+function modulo() {
+val = document.getElementById('resultado').value;
+document.getElementById('resultado').value = document.getElementById('resultado').value + "%";
+}
+//
+function exp(){
+    document.getElementById('resultado').value = Math.exp(document.getElementById('resultado').value);
+}
+//
+function quadrado(){
+    document.getElementById('resultado').value = eval(document.getElementById('resultado').value) * eval(document.getElementById('resultado').value);
+}
+//
+function alteraSinal() {
+    if(document.getElementById('resultado').value.substring(0, 1) == "-")
+    document.getElementById('resultado').value = document.getElementById('resultado').value.substring(1, document.getElementById('resultado').value.length);
+    else
+    document.getElementById('resultado').value = "-" + document.getElementById('resultado').value;
+}
+//
 //
 //
 //
