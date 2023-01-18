@@ -83,6 +83,36 @@ window.onload = () => {
             if(event.charCode >= 48 && event.charCode <= 57){
                 tecladoNum(event);
             }
+            else if(event.key == "Enter"){
+                resultado = parseFloat(document.getElementById('resultado').value); // resultado vira tipo float
+                sessionStorage.setItem(document.getElementById('resultado').value, document.getElementById('resultado').value); //é armazenado  seu valor no sessionStorage
+                if (valor == (resultado) || decimal == (resultado)) { //se o valor do comparador é igual o resultado digitado
+                    pontuacao(); //conta os pontos
+                    pontos_valor++; //os pontos são contados
+                    sistemNivel(pontos_valor); // leva pro sistema de nivel pra comparar
+                }
+                else { // se o resultado não for igual
+                    if (i == 3){ // se as vidas estiverem em 3
+                        vida1.innerHTML = document.getElementById('cv1').innerHTML; // coracão cheio vira coração vazio
+                        vida1.value = document.getElementById('cv1').value;
+                        i--; //diminui o contador de vidas
+                        sistemNivel(pontos_valor); // verifica o nivel pra continuar
+                    }else if (i == 2){ //se as vidas estiverem em 2
+                        vida2.innerHTML = document.getElementById('cv2').innerHTML; // coração cheio vira coração vazio
+                        vida2.value = document.getElementById('cv2').value;
+                        i--; //diminui o contador de vidas
+                        sistemNivel(pontos_valor);
+                    }else if (i == 1){ // se as vidas estiverem em 1
+                        vida3.innerHTML = document.getElementById('cv3').innerHTML; // coração cheio vira coração vazio
+                        vida3.value = document.getElementById('cv3').value;
+                        i--; // vidas zeram
+                        finalizacao(1); // finaliza o jogo no primeiro tipo (por erro)
+                    }  
+                }
+            }else if(event.key == "Delete"){
+                var resultado = document.getElementById('resultado').value;
+                document.getElementById('resultado').value = resultado.substring(0, resultado.length - 1);
+            }console.log(event);
         });
         function tecladoNum(event){
             let result = document.getElementById('resultado')
