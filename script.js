@@ -5,17 +5,17 @@ var val = 0.0;
 function insert(num) { 
     var numero = document.getElementById('resultado').value;
     document.getElementById('resultado').value = numero + num;
-}
+};
 //
 function clean() { 
     document.getElementById('resultado').value = "";
     document.getElementById('operacaoJogo').value = "";
-}
+};
 //
 function backspace() { 
     var resultado = document.getElementById('resultado').value;
     document.getElementById('resultado').value = resultado.substring(0, resultado.length - 1);
-}
+};
 //
 function result() {
     var resultado = document.getElementById('resultado').value;
@@ -24,54 +24,54 @@ function result() {
     } else {
         document.getElementById('resultado').value = "Não definido";
     }
-}
+};
 //
 function caractere(caractere) {
     if(document.getElementById('resultado').value == null || document.getElementById('resultado').value == "0")
     document.getElementById('resultado').value = caractere;
     else
     document.getElementById('resultado').value += caractere;
-}
+};
 //
 function cos(){
     document.getElementById('resultado').value = Math.cos(document.getElementById('resultado').value);
-}
+};
 //
 function sin(){
     document.getElementById('resultado').value = Math.sin(document.getElementById('resultado').value);
-}
+};
 //
 function tan(){
     document.getElementById('resultado').value = Math.tan(document.getElementById('resultado').value);
-}
+};
 //
 function sqrt(){
     document.getElementById('resultado').value = Math.sqrt(document.getElementById('resultado').value);
-}
+};
 //
 function log(){
     document.getElementById('resultado').value = Math.log(document.getElementById('resultado').value);
-}
+};
 //
 function modulo() {
 val = document.getElementById('resultado').value;
 document.getElementById('resultado').value = document.getElementById('resultado').value + "%";
-}
+};
 //
 function exp(){
     document.getElementById('resultado').value = Math.exp(document.getElementById('resultado').value);
-}
+};
 //
 function quadrado(){
     document.getElementById('resultado').value = eval(document.getElementById('resultado').value) * eval(document.getElementById('resultado').value);
-}
+};
 //
 function alteraSinal() {
     if(document.getElementById('resultado').value.substring(0, 1) == "-")
     document.getElementById('resultado').value = document.getElementById('resultado').value.substring(1, document.getElementById('resultado').value.length);
     else
     document.getElementById('resultado').value = "-" + document.getElementById('resultado').value;
-}
+};
 //
 //
 //
@@ -115,15 +115,13 @@ function telaJogo(){
 //
     var igual = document.getElementById('igualtecla'); 
     igual.addEventListener('click', function () { 
-            resultado = parseFloat(document.getElementById('resultado').value);
-            resultado 
+            resultado = parseFloat(document.getElementById('resultado').value); 
             if (valor == (resultado) || decimal == (resultado)) { 
                 pontuacao(); 
                 pontos_valor++;
                 sistemNivel(pontos_valor);
             }
             else { 
-                
                 if (i == 3){
                     vida1.innerHTML = document.getElementById('cv1').innerHTML;
                     vida1.value = document.getElementById('cv1').value;
@@ -144,7 +142,7 @@ function telaJogo(){
             }
             document.getElementById('resultado').value = ""; 
         });
-}
+};
 //
 function calculateM(operador){ 
     var primeiro = numeroOperacao(operador);
@@ -172,7 +170,7 @@ function calculateM(operador){
         document.getElementById('operacaoJogo').value = primeiro + " / " + segundo; 
         //
     }
-}
+};
 //
 function calculateMMedioDificil(operador){ 
     var pri = numeroOperacao(operador); 
@@ -205,7 +203,7 @@ function calculateMMedioDificil(operador){
         document.getElementById('operacaoJogo').value = pri + " + " + " ( " + seg + " - " + ter + " ) " + " - " + qua; 
         //
     }
-}
+};
 //
 function calculateMImpossivel(operador){ 
     var pri = numeroOperacao(operador); 
@@ -241,20 +239,20 @@ function calculateMImpossivel(operador){
         document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " - " +  seg + " ) / ( " + ter + " * " + qua + " ) ) / " + qui + " + " + sex + ") * " + set; 
         //
     }
-}
+};
 //
 function voltar() { 
     var volta = document.getElementById('voltar'); 
     volta.addEventListener('click', document.location.reload(true)); 
-}
+};
 //
 function numeroOperacao(num_random) { 
     return Math.floor(Math.random() * num_random + 1);
-}
+};
 //
 function operacao() { 
     return Math.floor(Math.random() * 4 + 1);
-}
+};
 //
 function pontuacao() { 
     var ponto = parseInt(document.getElementById('pontos').value); 
@@ -263,18 +261,20 @@ function pontuacao() {
     document.getElementById('pontos').innerHTML = ponto;
     clearInterval(interval);  
     configTimer(); 
-}
+};
 //
 function finalizacao(tipo){ 
     var pontoFinal = document.getElementById('pontos').value; 
     if(tipo == 0){ 
         alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal); 
+        sessionStorage.clear();
         window.location.reload(true); 
     }else{ 
         alert('Suas vidas acabaram, sua pontuação foi: ' + pontoFinal); 
+        sessionStorage.clear();
         window.location.reload(true);
     }
-}
+};
 //
 function startTimer(duration, display) { 
     var timer = duration, minutes, seconds;
@@ -290,7 +290,7 @@ function startTimer(duration, display) {
             finalizacao(0); 
         }
     }, 1000);
-}
+};
 //
 function configTimer() {
     var duration = 60 * 3; 
@@ -310,7 +310,30 @@ function sistemNivel(pontos_valor){
         calculateMImpossivel(100);
     }
 }
-function historico(){
-    
-}
+/* function historico(){
+    sessionStorage.setItem(operacaoJogo.value, comparador.value);
+    document.body.querySelector("#cont11").innerHTML = sessionStorage.getItem(operacaoJogo.value);
 
+    var i = document.getElementById()
+
+}; */
+function historico(){
+
+
+
+    sessionStorage.setItem(comparador.value, comparador.value);
+
+    var j = document.body.querySelector("#cont12").innerHTML;
+    j = sessionStorage.getItem(comparador.value);
+    var i = document.getElementById('cont12').outerHTML
+    document.getElementById('cont12').innerHTML = j + i;
+    //
+    sessionStorage.setItem(operacaoJogo.value, operacaoJogo.value);
+
+    var k = document.body.querySelector("#cont11").innerHTML;
+    k = sessionStorage.getItem(operacaoJogo.value);
+    var l = document.getElementById('cont11').outerHTML
+    document.getElementById('cont11').innerHTML = k + l;
+    
+    //
+};
