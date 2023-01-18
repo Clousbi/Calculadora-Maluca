@@ -9,203 +9,132 @@
     <link
         href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600&family=Raleway:ital,wght@0,300;1,400;1,500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" href="calculator.ico" type="image/x-icon">
     <title>Calculadora</title>
 </head>
-<body>
+<body class="bg-#BDC1AA mt-1" style="font-family:'Raleway', sans-serif, 'League Spartan', sans-serif;">
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado">
-                    <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
-                    <input type="text" id="pontos" style="display: none">
-                    <input type="text" id="comparador" style="display: none">
-                    <input type="text" id="operacaoJogo" style="display: none">
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="op" onclick="clean('C')">C</button>
-                    <button class="op" onclick="backspace('<')"><</button>
-                    <button class="op" onclick="insert('/')">/</button>
-                    <button class="op" onclick="insert('*')">x</button>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero" onclick="insert('7')">7</button>
-                    <button class="n" id="numero" onclick="insert('8')">8</button>
-                    <button class="n" id="numero" onclick="insert('9')">9</button>
-                    <button class="op" onclick="insert('-')">-</button>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12"> <!-- mudar os id -->
-                    <button class="n" id="numero" onclick="insert('4')">4</button>
-                    <button class="n" id="numero" onclick="insert('5')">5</button>
-                    <button class="n" id="numero" onclick="insert('6')">6</button>
-                    <button class="op" onclick="insert('+')">+</button>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" id="numero" onclick="insert('1')">1</button>
-                    <button class="n" id="numero" onclick="insert('2')">2</button>
-                    <button class="n" id="numero" onclick="insert('3')">3</button>
-                    <button class="op" id="igualtecla" onclick="result('=')">=</button>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="n" style="width: 26mm;" onclick="insert('0')">0</button>
-                    <button class="op" onclick="insert('.')">.</button>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
-                    <button class="calM" onclick="teste()">Calculadora Maluca</button>
-                    <button class="voltar" id="voltar" onclick="voltar()" style="display: none">Voltar</button>
-                    <span id="timer"></span>
+                <span id="timer" style="text-align: center;"></span>
+                <div class="calculadora" style="text-align: center;">
+                    <div style="display: none;" id="cv1"><img src="coracaoVazio.svg" alt="coracaoVazio"></div> 
+                    <div style="display: none;" id="cv2"><img src="coracaoVazio.svg" alt="coracaoVazio"></div> 
+                    <div style="display: none;" id="cv3"><img src="coracaoVazio.svg" alt="coracaoVazio"></div> 
+                    <div>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div>
+                                <label for="pontos" id="pontosJogo" style="display: none;">Pontos:</label>
+                            </div>
+                            <div>
+                                <div id="pontos" style="display: none; width: 90px;"></div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center">
+                                <div style="display: none;" id="vida1"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
+                                <div style="display: none;" id="vida2"><img src="coracaoCheio.svg" alt="coracaoCheio"></div> 
+                                <div style="display: none;" id="vida3"><img src="coracaoCheio.svg" alt="coracaoCheio"></div>
+                            </div>
+                        </div>
+                        <input type="text" readonly onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="resultado" class="bg-light border input-sm rounded mt-1" style="width: 365px;">
+                        <input type="text" id="comparador" style="display: none;">
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <input type="text" id="operacaoJogo" readonly style="display: none; width: 365px; " class="bg-light border input-sm rounded mt-1">
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="clear" style="width: 70px;" onclick="clean('C')">c</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="apaga" style="width: 70px;" onclick="backspace('<')"><</button>
+                        <button type="button" class="btn btn-warning d-inline p-2.5 mt-1" id="igualtecla" style="width: 70px;" onclick="result('=')">=</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="pi" style="width: 70px;" onclick="caractere(3.14159)">π</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="modulo" style="width: 70px;" onclick="modulo()">%</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_7" style="width: 70px;" onclick="insert('7')">7</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_8" style="width: 70px;" onclick="insert('8')">8</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_9" style="width: 70px;" onclick="insert('9')">9</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="exp" style="width: 70px;" onclick="exp()">e^x</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="divisao" style="width: 70px;" onclick="insert('/')">/</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_4" style="width: 70px;" onclick="insert('4')">4</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_5" style="width: 70px;" onclick="insert('5')">5</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_6" style="width: 70px;" onclick="insert('6')">6</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="logarit" style="width: 70px;" onclick="log()">log</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="multiplicacao" style="width: 70px;" onclick="insert('*')">x</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_1" style="width: 70px;" onclick="insert('1')">1</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_2" style="width: 70px;" onclick="insert('2')">2</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" id="numero_3" style="width: 70px;" onclick="insert('3')">3</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="raiz" style="width: 70px;" onclick="sqrt()">√</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="subtracao" style="width: 70px;" onclick="insert('-')">-</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="maisMenos"style="width: 70px;" onclick="alteraSinal()">±</button>
+                        <button type="button" class="btn btn-primary d-inline p-2.5 mt-1" style="width: 70px;" onclick="insert('0')">0</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="ponto" style="width: 70px;" onclick="insert('.')">.</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="aoQuadrado" style="width: 70px;" onclick="quadrado()">x²</button>
+                        <button type="button" class="btn btn-success d-inline p-2.5 mt-1" id="soma" style="width: 70px;" onclick="insert('+')">+</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="parenD" style="width: 70px;" onclick="caractere('(')">(</button>
+                        <button type="button" class="btn btn-info d-inline p-2.5 mt-1" id="parenE" style="width: 70px;" onclick="caractere(')')">)</button>
+                        <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="cos" style="width: 70px;" onclick="cos()">cos</button>
+                        <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="sin" style="width: 70px;" onclick="sin()">sin</button>
+                        <button type="button" class="btn btn-danger d-inline p-2.5 mt-1" id="tan" style="width: 70px;" onclick="tan()">tan</button>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <div>
+                            <button type="button" class="btn btn-warning mt-1" id="calM" onclick="telaJogo()" style="font-size: 12px; width: 365px;">Calculadora Maluca</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-warning mt-2" id="voltar" onclick="voltar()" style="display: none; font-size: 12px; width: 365px;">Voltar</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
+            <div class="d-flex flex-row justify-content-center">
+                <div class="table1 p-2 table-responsive" style="display: none;" id="tabela1">
+                    <table class="table-sm" style="border: 1px solid black;">
+                        <thead>
+                            <tr>
+                                <th>Cálculo</th>
+                                <th>Resposta Correta</th>
+                                <th>Sua Resposta</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpo1">
+                            <tr id="conteudo1">
+                                <td><div id="cont11"></div></td>
+                                <td><div id="cont12"></div></td>
+                                <td><div id="cont13"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table2 p-2 table-responsive" style="display: none;" id="tabela2">
+                    <table class="table-sm" style="border: 1px solid black;">
+                        <thead>
+                            <tr>
+                                <th>Cálculo</th>
+                                <th>Resposta Correta</th>
+                                <th>Sua Resposta</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpo2">
+                            <tr id="conteudo2">
+                                <td><div id="cont21"></div></td>
+                                <td><div id="cont22"></div></td>
+                                <td><div id="cont23"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>   
         </div>
     </div>
-    <script>
-        //calculadora normal
-        function insert(num) { //aparece o número na tabela
-            var numero = document.getElementById('resultado').value;
-            document.getElementById('resultado').value = numero + num;
-        }
-        //
-        function clean() { // limpa a operação inteira
-            document.getElementById('resultado').value = " ";
-            document.getElementById('operacaoJogo').value = " ";
-        }
-        //
-        function backspace() { // limpa somente um número
-            var resultado = document.getElementById('resultado').value;
-            document.getElementById('resultado').value = resultado.substring(0, resultado.length - 1);
-        }
-        //
-        function result() {//função da operação 
-            var resultado = document.getElementById('resultado').value;
-            if (resultado) {
-                document.getElementById('resultado').value = eval(resultado);
-            } else {
-                document.getElementById('resultado').value = "Não definido";
-            }
-        }
-        //
-        //
-        //
-        //calculadora maluca
-        var resultado;
-        var valor = 0;
-        var interval;
-        function teste(){
-            clean();
-            calculateM();
-            configTimer();
-            document.getElementById('pontos').value = '0';
-            //
-            var bloco = document.getElementById('operacaoJogo');
-            bloco.style.display = "block";
-            var volta = document.getElementById('voltar');
-            volta.style.display = "block";
-            var placar = document.getElementById('pontosJogo');
-            placar.style.display = "contents";
-            var ponto = document.getElementById('pontos');
-            ponto.style.display = "block";
-            var igual = document.getElementById('igualtecla');
-            igual.addEventListener('click', function () {
-                    resultado = parseInt(document.getElementById('resultado').value);
-                    if (valor == (resultado)) {
-                        pontuacao();
-                        calculateM();
-                    }
-                    else {
-                        finalizacao(1);
-                    }
-                    document.getElementById('resultado').value = "";
-                });
-        }
-        //
-        function calculateM(){
-            var primeiro = numeroOperacao();
-            var segundo = numeroOperacao();
-            var operacaoNum = operacao();
-            var igual = document.getElementById('igualtecla');
-            if (operacaoNum == 1) {
-                valor = primeiro + segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " + " + segundo;
-                //
-                
-            } else if (operacaoNum == 2) {
-                valor = primeiro - segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " - " + segundo;
-                //
-                
-            } else if (operacaoNum == 3) {
-                valor = primeiro * segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " * " + segundo;
-                //
-                
-            } else {
-                valor = primeiro / segundo;
-                document.getElementById('comparador').value = valor;
-                document.getElementById('operacaoJogo').value = primeiro + " / " + segundo;
-                //
-                
-            }
-        }
-        //
-        function voltar() {
-            var volta = document.getElementById('voltar');
-            volta.addEventListener('click', document.location.reload(true));
-        }
-        //
-        function numeroOperacao() { // randoniza de 0 a 10
-            return Math.floor(Math.random() * 10);
-        }
-        //
-        function operacao() { // randoniza de 1 a 4
-            return Math.floor(Math.random() * 4 + 1);
-        }
-        //
-        function pontuacao() {
-            var ponto = parseInt(document.getElementById('pontos').value);
-            ponto++;
-            document.getElementById('pontos').value = ponto;
-            clearInterval(interval);
-            configTimer();
-        }
-        //
-        function finalizacao(tipo){
-            var pontoFinal = document.getElementById('pontos').value;
-            if(tipo == 0){
-                alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal);
-                window.location.reload(true);
-            }else{
-                alert('Resposta errada, sua pontuação foi: ' + pontoFinal);
-                window.location.reload(true);
-            }
-        }
-        //
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            interval = setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                display.textContent = minutes + ":" + seconds;
-                if (--timer < 0) {
-                    timer = duration;
-                    display.style.display = 'none';
-                    finalizacao(0);
-                }
-            }, 1000);
-        }
-        //
-        function configTimer() {
-            var duration = 60 * 3; // Converter para segundos
-            display = document.querySelector('#timer'); // selecionando o timer
-            startTimer(duration, display); // iniciando o timer
-        };
-        //
-    </script>
+    <script src="script.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
@@ -213,5 +142,4 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
