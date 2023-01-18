@@ -77,6 +77,7 @@ function alteraSinal() {
 //
 //
 //calculadora maluca
+var resposta;
 var resultado;
 var valor = 0; 
 var decimal;
@@ -115,7 +116,8 @@ function telaJogo(){
 //
     var igual = document.getElementById('igualtecla'); 
     igual.addEventListener('click', function () { 
-            resultado = parseFloat(document.getElementById('resultado').value); 
+            resultado = parseFloat(document.getElementById('resultado').value);
+            sessionStorage.setItem(document.getElementById('resultado').value, document.getElementById('resultado').value);
             if (valor == (resultado) || decimal == (resultado)) { 
                 pontuacao(); 
                 pontos_valor++;
@@ -140,11 +142,12 @@ function telaJogo(){
                 }
                 
             }
-            document.getElementById('resultado').value = ""; 
         });
 };
 //
 function calculateM(operador){ 
+    historico();
+    document.getElementById('resultado').value = "";
     var primeiro = numeroOperacao(operador);
     var segundo = numeroOperacao(operador);
     var operacaoNum = operacao(); 
@@ -173,6 +176,8 @@ function calculateM(operador){
 };
 //
 function calculateMMedioDificil(operador){ 
+    historico();
+    document.getElementById('resultado').value = "";
     var pri = numeroOperacao(operador); 
     var seg = numeroOperacao(operador); 
     var ter = numeroOperacao(operador);
@@ -206,6 +211,8 @@ function calculateMMedioDificil(operador){
 };
 //
 function calculateMImpossivel(operador){ 
+    historico();
+    document.getElementById('resultado').value = "";
     var pri = numeroOperacao(operador); 
     var seg = numeroOperacao(operador); 
     var ter = numeroOperacao(operador);
@@ -244,6 +251,7 @@ function calculateMImpossivel(operador){
 function voltar() { 
     var volta = document.getElementById('voltar'); 
     volta.addEventListener('click', document.location.reload(true)); 
+    sessionStorage.clear();
 };
 //
 function numeroOperacao(num_random) { 
@@ -310,30 +318,41 @@ function sistemNivel(pontos_valor){
         calculateMImpossivel(100);
     }
 }
-/* function historico(){
-    sessionStorage.setItem(operacaoJogo.value, comparador.value);
-    document.body.querySelector("#cont11").innerHTML = sessionStorage.getItem(operacaoJogo.value);
-
-    var i = document.getElementById()
-
-}; */
+//
 function historico(){
-
-
-
-    sessionStorage.setItem(comparador.value, comparador.value);
-
-    var j = document.body.querySelector("#cont12").innerHTML;
-    j = sessionStorage.getItem(comparador.value);
-    var i = document.getElementById('cont12').outerHTML
-    document.getElementById('cont12').innerHTML = j + i;
-    //
-    sessionStorage.setItem(operacaoJogo.value, operacaoJogo.value);
-
-    var k = document.body.querySelector("#cont11").innerHTML;
-    k = sessionStorage.getItem(operacaoJogo.value);
-    var l = document.getElementById('cont11').outerHTML
-    document.getElementById('cont11').innerHTML = k + l;
-    
-    //
+    if (valor == (resultado) || decimal == (resultado)){
+        sessionStorage.setItem(operacaoJogo.value, operacaoJogo.value);
+        var k = document.body.querySelector("#cont11").innerHTML;
+        k = sessionStorage.getItem(operacaoJogo.value);
+        var l = document.getElementById('cont11').outerHTML
+        document.getElementById('cont11').innerHTML = k + l;
+        //
+        sessionStorage.setItem(comparador.value, comparador.value);
+        var j = document.body.querySelector("#cont12").innerHTML;
+        j = sessionStorage.getItem(comparador.value);
+        var i = document.getElementById('cont12').outerHTML
+        document.getElementById('cont12').innerHTML = j + i;
+        //
+        var m = document.body.querySelector("#cont13").innerHTML;
+        m = sessionStorage.getItem(document.getElementById('resultado').value);
+        var n = document.getElementById('cont13').outerHTML
+        document.getElementById('cont13').innerHTML = m + n;
+    }else{
+        sessionStorage.setItem(operacaoJogo.value, operacaoJogo.value);
+        var k = document.body.querySelector("#cont21").innerHTML;
+        k = sessionStorage.getItem(operacaoJogo.value);
+        var l = document.getElementById('cont21').outerHTML
+        document.getElementById('cont21').innerHTML = k + l;
+        //
+        sessionStorage.setItem(comparador.value, comparador.value);
+        var j = document.body.querySelector("#cont22").innerHTML;
+        j = sessionStorage.getItem(comparador.value);
+        var i = document.getElementById('cont22').outerHTML
+        document.getElementById('cont22').innerHTML = j + i;
+        //
+        var m = document.body.querySelector("#cont23").innerHTML;
+        m = sessionStorage.getItem(document.getElementById('resultado').value);
+        var n = document.getElementById('cont23').outerHTML
+        document.getElementById('cont23').innerHTML = m + n;
+    }
 };
