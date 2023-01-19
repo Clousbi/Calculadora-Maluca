@@ -85,7 +85,6 @@ window.onload = () => {
             }
             else if(event.key == "Enter"){
                 resultado = parseFloat(document.getElementById('resultado').value); // resultado vira tipo float
-                sessionStorage.setItem(document.getElementById('resultado').value, document.getElementById('resultado').value); //é armazenado  seu valor no sessionStorage
                 if (valor == (resultado) || decimal == (resultado)) { //se o valor do comparador é igual o resultado digitado
                     pontuacao(); //conta os pontos
                     pontos_valor++; //os pontos são contados
