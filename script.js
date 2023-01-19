@@ -443,7 +443,6 @@ function desativaBtn(){
     document.getElementById("sin").disabled = true;
     document.getElementById("tan").disabled = true;
     document.getElementById("soma").disabled = true;
-    document.getElementById("subtracao").disabled = true;
     document.getElementById("multiplicacao").disabled = true;
     document.getElementById("divisao").disabled = true;
     document.getElementById("parenD").disabled = true;
