@@ -136,8 +136,8 @@ function telaJogo(){//ao clicar no botão da calculadora maluca aparece o jogo
     calculateM(10);// faz o primeiro calculo
     configTimer(); // começa o cronometro
     cores();
+    desativaBtn();
     //
-    document.getElementById("clear").disabled = true;
     var bloco = document.getElementById('operacaoJogo'); 
     bloco.style.display = "block"; //aparece o bloco das operações
     var tabela1 = document.getElementById('tabela1'); 
@@ -430,4 +430,23 @@ function cores(){
     document.getElementById("cos").style.background = "#DF0101";
     document.getElementById("sin").style.background = "#DF0101";
     document.getElementById("tan").style.background = "#DF0101";
+}
+function desativaBtn(){
+    document.getElementById("clear").disabled = true;
+    document.getElementById("pi").disabled = true;
+    document.getElementById("modulo").disabled = true;
+    document.getElementById("exp").disabled = true;
+    document.getElementById("logarit").disabled = true;
+    document.getElementById("raiz").disabled = true;
+    document.getElementById("aoQuadrado").disabled = true;
+    document.getElementById("cos").disabled = true;
+    document.getElementById("sin").disabled = true;
+    document.getElementById("tan").disabled = true;
+    document.getElementById("soma").disabled = true;
+    document.getElementById("subtracao").disabled = true;
+    document.getElementById("multiplicacao").disabled = true;
+    document.getElementById("divisao").disabled = true;
+    document.getElementById("parenD").disabled = true;
+    document.getElementById("parenE").disabled = true;
+    document.getElementById("maisMenos").disabled = true;
 }
