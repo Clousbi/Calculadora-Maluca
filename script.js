@@ -111,6 +111,8 @@ window.onload = () => {
                 }
             }else if(event.key == "."){
                 insert('.');
+            }else if (event.key == "-"){
+                insert('-');
             }
         });
         function tecladoNum(event){
