@@ -135,6 +135,7 @@ function telaJogo(){//ao clicar no botão da calculadora maluca aparece o jogo
     clean(); //limpa a tela
     calculateM(10);// faz o primeiro calculo
     configTimer(); // começa o cronometro
+    cores();
     //
     document.getElementById("clear").disabled = true;
     var bloco = document.getElementById('operacaoJogo'); 
@@ -398,3 +399,35 @@ function historico(){ //histórico de cálculos
         document.getElementById('cont23').innerHTML = m + n; // linha criada + linha já existente (com sessionStorage)
     }
 };
+function cores(){
+    document.getElementById("clear").style.background = "#00BFFF";
+    document.getElementById("apaga").style.background = "#00BFFF";
+    document.getElementById("pi").style.background = "#00BFFF";
+    document.getElementById("modulo").style.background = "#00BFFF";
+    document.getElementById("exp").style.background = "#00BFFF";
+    document.getElementById("logarit").style.background = "#00BFFF";
+    document.getElementById("raiz").style.background = "#00BFFF";
+    document.getElementById("aoQuadrado").style.background = "#00BFFF";
+    document.getElementById("maisMenos").style.background = "#00BFFF";
+    document.getElementById("parenD").style.background = "#00BFFF";
+    document.getElementById("parenE").style.background = "#00BFFF";
+    document.getElementById("ponto").style.background = "#00BFFF";
+    document.getElementById("igualtecla").style.background = "#FF8000";
+    document.getElementById("numero_0").style.background = "#2E64FE";
+    document.getElementById("numero_1").style.background = "#2E64FE";
+    document.getElementById("numero_2").style.background = "#2E64FE";
+    document.getElementById("numero_3").style.background = "#2E64FE";
+    document.getElementById("numero_4").style.background = "#2E64FE";
+    document.getElementById("numero_5").style.background = "#2E64FE";
+    document.getElementById("numero_6").style.background = "#2E64FE";
+    document.getElementById("numero_7").style.background = "#2E64FE";
+    document.getElementById("numero_8").style.background = "#2E64FE";
+    document.getElementById("numero_9").style.background = "#2E64FE";
+    document.getElementById("soma").style.background = "#04B404";
+    document.getElementById("subtracao").style.background = "#04B404";
+    document.getElementById("multiplicacao").style.background = "#04B404";
+    document.getElementById("divisao").style.background = "#04B404";
+    document.getElementById("cos").style.background = "#DF0101";
+    document.getElementById("sin").style.background = "#DF0101";
+    document.getElementById("tan").style.background = "#DF0101";
+}
