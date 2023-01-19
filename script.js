@@ -77,7 +77,7 @@ function alteraSinal(){//altera sinal (positivo - negativo)
 //
 //
 //calculadora maluca
-/*window.onload = () => {
+window.onload = () => {
     var html = document.querySelector('html');
         html.addEventListener('keypress', function (event) {
             if(event.charCode >= 48 && event.charCode <= 57){
@@ -109,16 +109,15 @@ function alteraSinal(){//altera sinal (positivo - negativo)
                         finalizacao(1); // finaliza o jogo no primeiro tipo (por erro)
                     }  
                 }
-            }else if(event.key == "Delete"){
-                var resultado = document.getElementById('resultado').value;
-                document.getElementById('resultado').value = resultado.substring(0, resultado.length - 1);
-            }console.log(event);
+            }else if(event.key == "."){
+                insert('.');
+            }
         });
         function tecladoNum(event){
             let result = document.getElementById('resultado')
             result.value = result.value + event.key
         }
-}*/
+}
 var resposta;
 var resultado;
 var valor = 0; 
@@ -135,6 +134,7 @@ function telaJogo(){//ao clicar no botão da calculadora maluca aparece o jogo
     calculateM(10);// faz o primeiro calculo
     configTimer(); // começa o cronometro
     //
+    document.getElementById("clear").disabled = true;
     var bloco = document.getElementById('operacaoJogo'); 
     bloco.style.display = "block"; //aparece o bloco das operações
     var tabela1 = document.getElementById('tabela1'); 
