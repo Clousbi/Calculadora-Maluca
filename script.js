@@ -77,7 +77,7 @@ function alteraSinal(){//altera sinal (positivo - negativo)
 //
 //
 //calculadora maluca
-window.onload = () => {
+/*window.onload = () => {
     var html = document.querySelector('html');
         html.addEventListener('keypress', function (event) {
             if(event.charCode >= 48 && event.charCode <= 57){
@@ -118,7 +118,7 @@ window.onload = () => {
             let result = document.getElementById('resultado')
             result.value = result.value + event.key
         }
-}
+}*/
 var resposta;
 var resultado;
 var valor = 0; 
