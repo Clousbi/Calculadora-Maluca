@@ -1,25 +1,26 @@
 //calculadora normal
-var resultado = document.getElementById('resultado').value; 
+var resultado = document.getElementById('resultado').value;
 var val = 0.0;
 //
 function insert(num) { //inserir o número
     var numero = document.getElementById('resultado').value;
     document.getElementById('resultado').value = numero + num;
+    console.log(num)
 };
 //
 function clean() { //limpa a barra onde se insere o número
-    document.getElementById('resultado').value = ""; 
+    document.getElementById('resultado').value = "";
     document.getElementById('operacaoJogo').value = "";
 };
 //
 function backspace() { //apaga somente 1 caractere
-    var resultado = document.getElementById('resultado').value;
+    resultado = document.getElementById('resultado').value;
     document.getElementById('resultado').value = resultado.substring(0, resultado.length - 1);
 };
 //
 function result() { // resultado com operações simples
-    var resultado = document.getElementById('resultado').value;
-    if (resultado) {
+    resultado = document.getElementById('resultado').value;
+    if (resultado != null || resultado != '') {
         document.getElementById('resultado').value = eval(resultado);
     } else {
         document.getElementById('resultado').value = "Não definido";
@@ -27,129 +28,149 @@ function result() { // resultado com operações simples
 };
 //
 function caractere(caractere) { // pega caracteres como pi e parenteses e atribui valor
-    if(document.getElementById('resultado').value == null || document.getElementById('resultado').value == "0")
-    document.getElementById('resultado').value = caractere;
+    if (document.getElementById('resultado').value == null || document.getElementById('resultado').value == "0")
+        document.getElementById('resultado').value = caractere;
     else
-    document.getElementById('resultado').value += caractere;
+        document.getElementById('resultado').value += caractere;
 };
 //
-function cos(){ //cosseno
+function cos() { //cosseno
     document.getElementById('resultado').value = Math.cos(document.getElementById('resultado').value);
 };
 //
-function sin(){ //seno
+function sin() { //seno
     document.getElementById('resultado').value = Math.sin(document.getElementById('resultado').value);
 };
 //
-function tan(){ //tangente
+function tan() { //tangente
     document.getElementById('resultado').value = Math.tan(document.getElementById('resultado').value);
 };
 //
-function sqrt(){ //raiz quadrada
+function sqrt() { //raiz quadrada
     document.getElementById('resultado').value = Math.sqrt(document.getElementById('resultado').value);
 };
 //
-function log(){ //log
+function log() { //log
     document.getElementById('resultado').value = Math.log(document.getElementById('resultado').value);
 };
 //
-function modulo(){//módulo
-val = document.getElementById('resultado').value;
-document.getElementById('resultado').value = document.getElementById('resultado').value + "%";
+function modulo() {//módulo
+    val = document.getElementById('resultado').value;
+    document.getElementById('resultado').value = document.getElementById('resultado').value + "%";
 };
 //
-function exp(){//expoente na base 10
+function exp() {//expoente na base 10
     document.getElementById('resultado').value = Math.exp(document.getElementById('resultado').value);
 };
 //
-function quadrado(){//número ao quadrado
+function quadrado() {//número ao quadrado
     document.getElementById('resultado').value = eval(document.getElementById('resultado').value) * eval(document.getElementById('resultado').value);
 };
 //
-function alteraSinal(){//altera sinal (positivo - negativo)
-    if(document.getElementById('resultado').value.substring(0, 1) == "-")
-    document.getElementById('resultado').value = document.getElementById('resultado').value.substring(1, document.getElementById('resultado').value.length);
+function alteraSinal() {//altera sinal (positivo - negativo)
+    if (document.getElementById('resultado').value.substring(0, 1) == "-")
+        document.getElementById('resultado').value = document.getElementById('resultado').value.substring(1, document.getElementById('resultado').value.length);
     else
-    document.getElementById('resultado').value = "-" + document.getElementById('resultado').value;
+        document.getElementById('resultado').value = "-" + document.getElementById('resultado').value;
 };
 //
 //
 //
 //
 //calculadora maluca
+var control = 0;
+
 window.onload = () => {
     var html = document.querySelector('html');
-        html.addEventListener('keypress', function (event) {
-            if(event.charCode >= 48 && event.charCode <= 57){
-                tecladoNum(event);
-            }
-            else if(event.key == "Enter"){
-                resultado = parseFloat(document.getElementById('resultado').value); // resultado vira tipo float
-                if (valor == (resultado) || decimal == (resultado)) { //se o valor do comparador é igual o resultado digitado
-                    pontuacao(); //conta os pontos
-                    pontos_valor++; //os pontos são contados
-                    sistemNivel(pontos_valor); // leva pro sistema de nivel pra comparar
-                }
-                else { // se o resultado não for igual
-                    if (i == 3){ // se as vidas estiverem em 3
-                        vida1.innerHTML = document.getElementById('cv1').innerHTML; // coracão cheio vira coração vazio
-                        vida1.value = document.getElementById('cv1').value;
-                        i--; //diminui o contador de vidas
-                        sistemNivel(pontos_valor); // verifica o nivel pra continuar
-                    }else if (i == 2){ //se as vidas estiverem em 2
-                        vida2.innerHTML = document.getElementById('cv2').innerHTML; // coração cheio vira coração vazio
-                        vida2.value = document.getElementById('cv2').value;
-                        i--; //diminui o contador de vidas
-                        sistemNivel(pontos_valor);
-                    }else if (i == 1){ // se as vidas estiverem em 1
-                        vida3.innerHTML = document.getElementById('cv3').innerHTML; // coração cheio vira coração vazio
-                        vida3.value = document.getElementById('cv3').value;
-                        i--; // vidas zeram
-                        finalizacao(1); // finaliza o jogo no primeiro tipo (por erro)
-                    }  
-                }
-            }else if(event.key == "."){
-                insert('.');
-            }else if (event.key == "-"){
-                insert('-');
-            }
-        });
-        function tecladoNum(event){
-            let result = document.getElementById('resultado')
-            result.value = result.value + event.key
+    html.addEventListener('keypress', function (event) {
+        event.preventDefault()
+        if (event.charCode >= 48 && event.charCode <= 57) {
+            tecladoNum(event);
         }
+        else if (event.key == "Enter" && control == 0) {
+            result('=');
+        } else if (event.key == "Enter" && control == 1) {
+            resultado = parseFloat(document.getElementById('resultado').value); // resultado vira tipo float
+            sessionStorage.setItem(document.getElementById('resultado').value, document.getElementById('resultado').value); //é armazenado  seu valor no sessionStorage
+            if (valor == (resultado) || decimal == (resultado)) { //se o valor do comparador é igual o resultado digitado
+                pontuacao(); //conta os pontos
+                pontos_valor++; //os pontos são contados
+                sistemNivel(pontos_valor); // leva pro sistema de nivel pra comparar
+            } else { // se o resultado não for igual
+                if (i == 3) { // se as vidas estiverem em 3
+                    vida1.innerHTML = document.getElementById('cv1').innerHTML; // coracão cheio vira coração vazio
+                    vida1.value = document.getElementById('cv1').value;
+                    i--; //diminui o contador de vidas
+                    sistemNivel(pontos_valor); // verifica o nivel pra continuar
+                } else if (i == 2) { //se as vidas estiverem em 2
+                    vida2.innerHTML = document.getElementById('cv2').innerHTML; // coração cheio vira coração vazio
+                    vida2.value = document.getElementById('cv2').value;
+                    i--; //diminui o contador de vidas
+                    sistemNivel(pontos_valor);
+                } else if (i == 1) { // se as vidas estiverem em 1
+                    vida3.innerHTML = document.getElementById('cv3').innerHTML; // coração cheio vira coração vazio
+                    vida3.value = document.getElementById('cv3').value;
+                    i--; // vidas zeram
+                    finalizacao(1); // finaliza o jogo no primeiro tipo (por erro)
+                }
+            }
+        } else if (event.key == ".") {
+            insert('.');
+        }else if (event.key == ",") {
+            insert('.');
+        } else if (event.key == "-") {
+            insert('-');
+        } else if (event.key == "+") {
+            insert('+');
+        } else if (event.key == "*") {
+            insert('*');
+        } else if (event.key == "/") {
+            insert('/');
+        } else if (event.key == "(") {
+            caractere('(');
+        } else if (event.key == ")") {
+            caractere(')');
+        }
+    });
+
+
+}
+function tecladoNum(event) {
+    let resulta = document.getElementById('resultado');
+    resulta.value = resulta.value + event.key;
 }
 var resposta;
 var resultado;
-var valor = 0; 
+var valor = 0;
 var decimal;
-var interval; 
+var interval;
 var vida1 = document.getElementById('vida1');
 var vida2 = document.getElementById('vida2');
 var vida3 = document.getElementById('vida3');
 var i = 3;
 var pontos_valor = document.getElementById('pontos').value = '0';
 //
-function telaJogo(){//ao clicar no botão da calculadora maluca aparece o jogo
+function telaJogo() {//ao clicar no botão da calculadora maluca aparece o jogo
     clean(); //limpa a tela
     calculateM(10);// faz o primeiro calculo
     configTimer(); // começa o cronometro
     cores();
     desativaBtn();
+    control = 1;
     //
-    var bloco = document.getElementById('operacaoJogo'); 
+    var bloco = document.getElementById('operacaoJogo');
     bloco.style.display = "block"; //aparece o bloco das operações
-    var tabela1 = document.getElementById('tabela1'); 
+    var tabela1 = document.getElementById('tabela1');
     tabela1.style.display = "block"; // aparece a primeira tabela
-    var tabela2 = document.getElementById('tabela2'); 
+    var tabela2 = document.getElementById('tabela2');
     tabela2.style.display = "block";//aparece a segunda tabela
-    var volta = document.getElementById('voltar'); 
+    var volta = document.getElementById('voltar');
     volta.style.display = "block";//aparece o botão de voltar
-    var placar = document.getElementById('pontosJogo'); 
+    var placar = document.getElementById('pontosJogo');
     placar.style.display = "contents";//aparece o placar de pontos
-    var ponto = document.getElementById('pontos'); 
+    var ponto = document.getElementById('pontos');
     ponto.style.display = "block";//aparece os pontos
-    var btnCalM = document.getElementById('calM'); 
+    var btnCalM = document.getElementById('calM');
     btnCalM.style.display = "none";//desaparece o botão da calculadora 
     var vida1 = document.getElementById('vida1');
     vida1.style.display = "block";//aparece a vida
@@ -157,38 +178,38 @@ function telaJogo(){//ao clicar no botão da calculadora maluca aparece o jogo
     vida2.style.display = "block";//aparece a vida
     var vida3 = document.getElementById('vida3');
     vida3.style.display = "block";//aparece a vida
-//
-    var igual = document.getElementById('igualtecla'); 
+    //
+    var igual = document.getElementById('igualtecla');
     igual.addEventListener('click', function () { // ao clicar o botão de igual:
-            resultado = parseFloat(document.getElementById('resultado').value); // resultado vira tipo float
-            sessionStorage.setItem(document.getElementById('resultado').value, document.getElementById('resultado').value); //é armazenado  seu valor no sessionStorage
-            if (valor == (resultado) || decimal == (resultado)) { //se o valor do comparador é igual o resultado digitado
-                pontuacao(); //conta os pontos
-                pontos_valor++; //os pontos são contados
-                sistemNivel(pontos_valor); // leva pro sistema de nivel pra comparar
+        resultado = parseFloat(document.getElementById('resultado').value); // resultado vira tipo float
+        sessionStorage.setItem(document.getElementById('resultado').value, document.getElementById('resultado').value); //é armazenado  seu valor no sessionStorage
+        if (valor == (resultado) || decimal == (resultado)) { //se o valor do comparador é igual o resultado digitado
+            pontuacao(); //conta os pontos
+            pontos_valor++; //os pontos são contados
+            sistemNivel(pontos_valor); // leva pro sistema de nivel pra comparar
+        }
+        else { // se o resultado não for igual
+            if (i == 3) { // se as vidas estiverem em 3
+                vida1.innerHTML = document.getElementById('cv1').innerHTML; // coracão cheio vira coração vazio
+                vida1.value = document.getElementById('cv1').value;
+                i--; //diminui o contador de vidas
+                sistemNivel(pontos_valor); // verifica o nivel pra continuar
+            } else if (i == 2) { //se as vidas estiverem em 2
+                vida2.innerHTML = document.getElementById('cv2').innerHTML; // coração cheio vira coração vazio
+                vida2.value = document.getElementById('cv2').value;
+                i--; //diminui o contador de vidas
+                sistemNivel(pontos_valor);
+            } else if (i == 1) { // se as vidas estiverem em 1
+                vida3.innerHTML = document.getElementById('cv3').innerHTML; // coração cheio vira coração vazio
+                vida3.value = document.getElementById('cv3').value;
+                i--; // vidas zeram
+                finalizacao(1); // finaliza o jogo no primeiro tipo (por erro)
             }
-            else { // se o resultado não for igual
-                if (i == 3){ // se as vidas estiverem em 3
-                    vida1.innerHTML = document.getElementById('cv1').innerHTML; // coracão cheio vira coração vazio
-                    vida1.value = document.getElementById('cv1').value;
-                    i--; //diminui o contador de vidas
-                    sistemNivel(pontos_valor); // verifica o nivel pra continuar
-                }else if (i == 2){ //se as vidas estiverem em 2
-                    vida2.innerHTML = document.getElementById('cv2').innerHTML; // coração cheio vira coração vazio
-                    vida2.value = document.getElementById('cv2').value;
-                    i--; //diminui o contador de vidas
-                    sistemNivel(pontos_valor);
-                }else if (i == 1){ // se as vidas estiverem em 1
-                    vida3.innerHTML = document.getElementById('cv3').innerHTML; // coração cheio vira coração vazio
-                    vida3.value = document.getElementById('cv3').value;
-                    i--; // vidas zeram
-                    finalizacao(1); // finaliza o jogo no primeiro tipo (por erro)
-                }  
-            }
-        });
+        }
+    });
 };
 //
-function calculateM(operador){ //operação da calculado nível fácil
+function calculateM(operador) { //operação da calculado nível fácil
     historico(); // guarda no historico
     document.getElementById('resultado').value = ""; //limpa o resultado
     var primeiro = numeroOperacao(operador); //randoniza um número
@@ -218,7 +239,7 @@ function calculateM(operador){ //operação da calculado nível fácil
     }
 };
 //
-function calculateMMedioDificil(operador){ //operação da calculado nível médio/dificil
+function calculateMMedioDificil(operador) { //operação da calculado nível médio/dificil
     historico(); // guarda no historico
     document.getElementById('resultado').value = ""; //limpa o resultado
     var pri = numeroOperacao(operador); //randoniza um número
@@ -253,7 +274,7 @@ function calculateMMedioDificil(operador){ //operação da calculado nível méd
     }
 };
 //
-function calculateMImpossivel(operador){ //operação da calculado nível impossivel
+function calculateMImpossivel(operador) { //operação da calculado nível impossivel
     historico(); // guarda no historico
     document.getElementById('resultado').value = ""; //limpa o resultado
     var pri = numeroOperacao(operador); //randoniza um número
@@ -263,7 +284,7 @@ function calculateMImpossivel(operador){ //operação da calculado nível imposs
     var qui = numeroOperacao(operador); //randoniza um número
     var sex = numeroOperacao(operador); //randoniza um número
     var set = numeroOperacao(operador); //randoniza um número
-    var operacaoNum = operacao(); 
+    var operacaoNum = operacao();
     if (operacaoNum == 1) { //se a operação for 1
         valor = (pri * (seg + ter) / qua - qui) + sex / set; //expressão
         decimal = valor.toFixed(3); //é arrendodado até três casas decimais
@@ -271,7 +292,7 @@ function calculateMImpossivel(operador){ //operação da calculado nível imposs
         document.getElementById('operacaoJogo').value = " ( " + pri + " * ( " + seg + " + " + ter + " ) / " + qua + " - " + qui + " ) + " + sex + " / " + set; //é mostrado na tela
         //
     } else if (operacaoNum == 2) { //se a operação for 2
-        valor = (((pri + seg / ter ) * (qua - qui) / sex) + set); //expressão
+        valor = (((pri + seg / ter) * (qua - qui) / sex) + set); //expressão
         decimal = valor.toFixed(3); //é arrendodado até três casas decimais
         document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
         document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " + " + seg + " / " + ter + " ) * ( " + qua + " - " + qui + " ) / " + sex + " ) + " + set + " ) "; //é mostrado na tela
@@ -286,13 +307,13 @@ function calculateMImpossivel(operador){ //operação da calculado nível imposs
         valor = (((pri - seg) / (ter * qua)) / qui + sex) * set; //expressão
         decimal = valor.toFixed(3); //é arrendodado até três casas decimais
         document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " - " +  seg + " ) / ( " + ter + " * " + qua + " ) ) / " + qui + " + " + sex + ") * " + set; //é mostrado na tela
+        document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " - " + seg + " ) / ( " + ter + " * " + qua + " ) ) / " + qui + " + " + sex + ") * " + set; //é mostrado na tela
         //
     }
 };
 //
 function voltar() { //função de voltar
-    var volta = document.getElementById('voltar'); 
+    var volta = document.getElementById('voltar');
     volta.addEventListener('click', document.location.reload(true)); //recarrega o site
     sessionStorage.clear(); //limpa o sessionStorage
 };
@@ -314,13 +335,13 @@ function pontuacao() { // sistema de pontos
     configTimer(); //recomeça o cronometro
 };
 //
-function finalizacao(tipo){ // fim do jogo
-    var pontoFinal = document.getElementById('pontos').value; 
-    if(tipo == 0){ // se for por tempo finalizado
+function finalizacao(tipo) { // fim do jogo
+    var pontoFinal = document.getElementById('pontos').value;
+    if (tipo == 0) { // se for por tempo finalizado
         alert('Seu tempo acabou, sua pontuação foi: ' + pontoFinal); // alerta que o tempo acabou 
         sessionStorage.clear(); //limpa o sessionStorage
         window.location.reload(true); //recarrega o site
-    }else{ // se for do tipo de erro
+    } else { // se for do tipo de erro
         alert('Suas vidas acabaram, sua pontuação foi: ' + pontoFinal); // alerta que as vidas acabaram
         sessionStorage.clear(); //limpa o sessionStorage
         window.location.reload(true);//recarrega o site
@@ -349,24 +370,24 @@ function configTimer() {
     startTimer(duration, display); // iniciando o timer
 };
 //
-function sistemNivel(pontos_valor){ //sistema de nível
-    if (pontos_valor <= 10){ //se os pontos forem menor que 10
+function sistemNivel(pontos_valor) { //sistema de nível
+    if (pontos_valor <= 10) { //se os pontos forem menor que 10
         calculateM(10); // randoniza os números de 1 a 10, nível fácil
-    }else if(pontos_valor > 10 && pontos_valor <= 20){ //se os pontos forem entre 11 e 20
+    } else if (pontos_valor > 10 && pontos_valor <= 20) { //se os pontos forem entre 11 e 20
         calculateMMedioDificil(10);  // randoniza os números de 1 a 10, nível médio
     }
-    else if(pontos_valor > 20 && pontos_valor <= 50){ //se os pontos forem entre 21 e 50
+    else if (pontos_valor > 20 && pontos_valor <= 50) { //se os pontos forem entre 21 e 50
         calculateMMedioDificil(30); // randoniza os números de 1 a 30, nível dificil
-    }else{ //se os pontos forem maiores que 50
+    } else { //se os pontos forem maiores que 50
         calculateMImpossivel(100); // randoniza os números de 1 a 100, nível impossivel
     }
 }
 //
-function historico(){ //histórico de cálculos
+function historico() { //histórico de cálculos
     sessionStorage.setItem(operacaoJogo.value, operacaoJogo.value); //armazena no sessionStorage a operação do jogo
     sessionStorage.setItem(comparador.value, comparador.value); //armazena no sessionStorage o resultado correto da operação
 
-    if (valor == (resultado) || decimal == (resultado)){ //se o valor e o resultado forem iguais (resposta correta)
+    if (valor == (resultado) || decimal == (resultado)) { //se o valor e o resultado forem iguais (resposta correta)
         var k = document.body.querySelector("#cont11").innerHTML; //chama a coluna
         k = sessionStorage.getItem(operacaoJogo.value); //a coluna passa a ter o valor do sessionStorage
         var l = document.getElementById('cont11').outerHTML //cria outra linha
@@ -381,13 +402,13 @@ function historico(){ //histórico de cálculos
         m = sessionStorage.getItem(document.getElementById('resultado').value); //a coluna passa a ter o valor do sessionStorage
         var n = document.getElementById('cont13').outerHTML //cria outra linha
         document.getElementById('cont13').innerHTML = m + n; // linha criada + linha já existente (com sessionStorage)
-    }else{
+    } else {
         var k = document.body.querySelector("#cont21").innerHTML; //chama a coluna
         k = sessionStorage.getItem(operacaoJogo.value); //a coluna passa a ter o valor do sessionStorage
         var l = document.getElementById('cont21').outerHTML //cria outra linha
         document.getElementById('cont21').innerHTML = k + l; // linha criada + linha já existente (com sessionStorage)
         //
-        var j = document.body.querySelector("#cont22").innerHTML; //chama a coluna
+        var j = document.body.querySelector("#cont22").innerHTML; //chama a coluna..
         j = sessionStorage.getItem(comparador.value); //a coluna passa a ter o valor do sessionStorage
         var i = document.getElementById('cont22').outerHTML //cria outra linha
         document.getElementById('cont22').innerHTML = j + i; // linha criada + linha já existente (com sessionStorage)
@@ -398,7 +419,7 @@ function historico(){ //histórico de cálculos
         document.getElementById('cont23').innerHTML = m + n; // linha criada + linha já existente (com sessionStorage)
     }
 };
-function cores(){
+function cores() {
     document.getElementById("clear").style.background = "#00BFFF";
     document.getElementById("apaga").style.background = "#00BFFF";
     document.getElementById("pi").style.background = "#00BFFF";
@@ -430,7 +451,7 @@ function cores(){
     document.getElementById("sin").style.background = "#DF0101";
     document.getElementById("tan").style.background = "#DF0101";
 }
-function desativaBtn(){
+function desativaBtn() {
     document.getElementById("clear").disabled = true;
     document.getElementById("pi").disabled = true;
     document.getElementById("modulo").disabled = true;
