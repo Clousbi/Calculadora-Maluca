@@ -79,7 +79,17 @@ function alteraSinal() {//altera sinal (positivo - negativo)
 //
 //calculadora maluca
 var control = 0;
-
+var resposta;
+var resultado;
+var valor = 0;
+var decimal;
+var interval;
+var vida1 = document.getElementById('vida1');
+var vida2 = document.getElementById('vida2');
+var vida3 = document.getElementById('vida3');
+var i = 3;
+var pontos_valor = document.getElementById('pontos').value = '0';
+//
 window.onload = () => {
     var html = document.querySelector('html');
     html.addEventListener('keypress', function (event) {
@@ -132,52 +142,20 @@ window.onload = () => {
             caractere(')');
         }
     });
-
-
 }
+//
 function tecladoNum(event) {
     let resulta = document.getElementById('resultado');
     resulta.value = resulta.value + event.key;
 }
-var resposta;
-var resultado;
-var valor = 0;
-var decimal;
-var interval;
-var vida1 = document.getElementById('vida1');
-var vida2 = document.getElementById('vida2');
-var vida3 = document.getElementById('vida3');
-var i = 3;
-var pontos_valor = document.getElementById('pontos').value = '0';
 //
 function telaJogo() {//ao clicar no botão da calculadora maluca aparece o jogo
     clean(); //limpa a tela
     calculateM(10);// faz o primeiro calculo
     configTimer(); // começa o cronometro
     cores();
-    desativaBtn();
+    desativaAtivaBtn();
     control = 1;
-    //
-    var bloco = document.getElementById('operacaoJogo');
-    bloco.style.display = "block"; //aparece o bloco das operações
-    var tabela1 = document.getElementById('tabela1');
-    tabela1.style.display = "block"; // aparece a primeira tabela
-    var tabela2 = document.getElementById('tabela2');
-    tabela2.style.display = "block";//aparece a segunda tabela
-    var volta = document.getElementById('voltar');
-    volta.style.display = "block";//aparece o botão de voltar
-    var placar = document.getElementById('pontosJogo');
-    placar.style.display = "contents";//aparece o placar de pontos
-    var ponto = document.getElementById('pontos');
-    ponto.style.display = "block";//aparece os pontos
-    var btnCalM = document.getElementById('calM');
-    btnCalM.style.display = "none";//desaparece o botão da calculadora 
-    var vida1 = document.getElementById('vida1');
-    vida1.style.display = "block";//aparece a vida
-    var vida2 = document.getElementById('vida2');
-    vida2.style.display = "block";//aparece a vida
-    var vida3 = document.getElementById('vida3');
-    vida3.style.display = "block";//aparece a vida
     //
     var igual = document.getElementById('igualtecla');
     igual.addEventListener('click', function () { // ao clicar o botão de igual:
@@ -207,109 +185,6 @@ function telaJogo() {//ao clicar no botão da calculadora maluca aparece o jogo
             }
         }
     });
-};
-//
-function calculateM(operador) { //operação da calculado nível fácil
-    historico(); // guarda no historico
-    document.getElementById('resultado').value = ""; //limpa o resultado
-    var primeiro = numeroOperacao(operador); //randoniza um número
-    var segundo = numeroOperacao(operador); // randoniza outro número
-    var operacaoNum = operacao(); //randoniza a operação
-    if (operacaoNum == 1) { //se a operação for 1
-        valor = primeiro + segundo; //é soma
-        document.getElementById('comparador').value = valor; // o comparador possui o valor do valor
-        document.getElementById('operacaoJogo').value = primeiro + " + " + segundo; //é mostrado na tela
-        //
-    } else if (operacaoNum == 2) { //se a operação for 2
-        valor = primeiro - segundo; //é subtração
-        document.getElementById('comparador').value = valor; // o comparador possui o valor do valor
-        document.getElementById('operacaoJogo').value = primeiro + " - " + segundo; //é mostrado na tela
-        //
-    } else if (operacaoNum == 3) { //se a operação for 3
-        valor = primeiro * segundo; //é multiplicação
-        document.getElementById('comparador').value = valor; // o comparador possui o valor do valor
-        document.getElementById('operacaoJogo').value = primeiro + " * " + segundo; //é mostrado na tela
-        // 
-    } else { //se a operação for 4
-        valor = primeiro / segundo; //é divisão
-        decimal = valor.toFixed(2); //é arrendodado até duas casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal 
-        document.getElementById('operacaoJogo').value = primeiro + " / " + segundo; //é mostrado na tela
-        //
-    }
-};
-//
-function calculateMMedioDificil(operador) { //operação da calculado nível médio/dificil
-    historico(); // guarda no historico
-    document.getElementById('resultado').value = ""; //limpa o resultado
-    var pri = numeroOperacao(operador); //randoniza um número
-    var seg = numeroOperacao(operador); //randoniza um número
-    var ter = numeroOperacao(operador); //randoniza um número
-    var qua = numeroOperacao(operador); //randoniza um número
-    var operacaoNum = operacao(); //randoniza a operação
-    if (operacaoNum == 1) { //se a operação for 1
-        valor = pri * (seg + ter) / qua; //expressão
-        decimal = valor.toFixed(2);  //é arrendodado até duas casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = pri + " * " + " ( " + seg + " + " + ter + " ) " + " / " + qua; //é mostrado na tela
-        //
-    } else if (operacaoNum == 2) { //se a operação for 2
-        valor = pri / (seg * ter) + qua; //expressão
-        decimal = valor.toFixed(2);  //é arrendodado até duas casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = pri + " / " + " ( " + seg + " * " + ter + " ) " + " + " + qua; //é mostrado na tela
-        //
-    } else if (operacaoNum == 3) { //se a operação for 3
-        valor = pri - (seg / ter) * qua; //expressão
-        decimal = valor.toFixed(2); //é arrendodado até duas casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = pri + " - " + " ( " + seg + " / " + ter + " ) " + " * " + qua; //é mostrado na tela
-        // 
-    } else {  //se a operação for 4
-        valor = pri + (seg - ter) - qua; //expressão
-        decimal = valor.toFixed(2); //é arrendodado até duas casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = pri + " + " + " ( " + seg + " - " + ter + " ) " + " - " + qua; //é mostrado na tela
-        //
-    }
-};
-//
-function calculateMImpossivel(operador) { //operação da calculado nível impossivel
-    historico(); // guarda no historico
-    document.getElementById('resultado').value = ""; //limpa o resultado
-    var pri = numeroOperacao(operador); //randoniza um número
-    var seg = numeroOperacao(operador); //randoniza um número
-    var ter = numeroOperacao(operador); //randoniza um número
-    var qua = numeroOperacao(operador); //randoniza um número
-    var qui = numeroOperacao(operador); //randoniza um número
-    var sex = numeroOperacao(operador); //randoniza um número
-    var set = numeroOperacao(operador); //randoniza um número
-    var operacaoNum = operacao();
-    if (operacaoNum == 1) { //se a operação for 1
-        valor = (pri * (seg + ter) / qua - qui) + sex / set; //expressão
-        decimal = valor.toFixed(3); //é arrendodado até três casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal 
-        document.getElementById('operacaoJogo').value = " ( " + pri + " * ( " + seg + " + " + ter + " ) / " + qua + " - " + qui + " ) + " + sex + " / " + set; //é mostrado na tela
-        //
-    } else if (operacaoNum == 2) { //se a operação for 2
-        valor = (((pri + seg / ter) * (qua - qui) / sex) + set); //expressão
-        decimal = valor.toFixed(3); //é arrendodado até três casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " + " + seg + " / " + ter + " ) * ( " + qua + " - " + qui + " ) / " + sex + " ) + " + set + " ) "; //é mostrado na tela
-        //
-    } else if (operacaoNum == 3) { //se a operação for 3
-        valor = pri / seg - ter * (qua - qui) * (sex - set); //expressão
-        decimal = valor.toFixed(3); //é arrendodado até três casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = pri + " / " + seg + " - " + ter + " * ( " + qua + " - " + qui + " ) * ( " + sex + " - " + set + " ) "; //é mostrado na tela
-        // 
-    } else { //se a operação for 4
-        valor = (((pri - seg) / (ter * qua)) / qui + sex) * set; //expressão
-        decimal = valor.toFixed(3); //é arrendodado até três casas decimais
-        document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
-        document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " - " + seg + " ) / ( " + ter + " * " + qua + " ) ) / " + qui + " + " + sex + ") * " + set; //é mostrado na tela
-        //
-    }
 };
 //
 function voltar() { //função de voltar
@@ -372,21 +247,110 @@ function configTimer() {
 //
 function sistemNivel(pontos_valor) { //sistema de nível
     if (pontos_valor <= 10) { //se os pontos forem menor que 10
-        calculateM(10); // randoniza os números de 1 a 10, nível fácil
-    } else if (pontos_valor > 10 && pontos_valor <= 20) { //se os pontos forem entre 11 e 20
-        calculateMMedioDificil(10);  // randoniza os números de 1 a 10, nível médio
-    }
-    else if (pontos_valor > 20 && pontos_valor <= 50) { //se os pontos forem entre 21 e 50
-        calculateMMedioDificil(30); // randoniza os números de 1 a 30, nível dificil
+        
+        historico(); // guarda no historico
+        document.getElementById('resultado').value = ""; //limpa o resultado
+        var primeiro = numeroOperacao(10); //randoniza um número
+        var segundo = numeroOperacao(10); // randoniza outro número
+        var operacaoNum = operacao(); //randoniza a operação
+        if (operacaoNum == 1) { //se a operação for 1
+            valor = primeiro + segundo; //é soma
+            document.getElementById('comparador').value = valor; // o comparador possui o valor do valor
+            document.getElementById('operacaoJogo').value = primeiro + " + " + segundo; //é mostrado na tela
+            //
+        } else if (operacaoNum == 2) { //se a operação for 2
+            valor = primeiro - segundo; //é subtração
+            document.getElementById('comparador').value = valor; // o comparador possui o valor do valor
+            document.getElementById('operacaoJogo').value = primeiro + " - " + segundo; //é mostrado na tela
+            //
+        } else if (operacaoNum == 3) { //se a operação for 3
+            valor = primeiro * segundo; //é multiplicação
+            document.getElementById('comparador').value = valor; // o comparador possui o valor do valor
+            document.getElementById('operacaoJogo').value = primeiro + " * " + segundo; //é mostrado na tela
+            // 
+        } else { //se a operação for 4
+            valor = primeiro / segundo; //é divisão
+            decimal = valor.toFixed(2); //é arrendodado até duas casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal 
+            document.getElementById('operacaoJogo').value = primeiro + " / " + segundo; //é mostrado na tela
+            //
+        }
+        
+    } else if (pontos_valor > 10 && pontos_valor <= 50) { //se os pontos forem entre 11 e 50
+        historico(); // guarda no historico
+        document.getElementById('resultado').value = ""; //limpa o resultado
+        var pri = numeroOperacao(50); //randoniza um número
+        var seg = numeroOperacao(50); //randoniza um número
+        var ter = numeroOperacao(50); //randoniza um número
+        var qua = numeroOperacao(50); //randoniza um número
+        var operacaoNum = operacao(); //randoniza a operação
+        if (operacaoNum == 1) { //se a operação for 1
+            valor = pri * (seg + ter) / qua; //expressão
+            decimal = valor.toFixed(2);  //é arrendodado até duas casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = pri + " * " + " ( " + seg + " + " + ter + " ) " + " / " + qua; //é mostrado na tela
+            //
+        } else if (operacaoNum == 2) { //se a operação for 2
+            valor = pri / (seg * ter) + qua; //expressão
+            decimal = valor.toFixed(2);  //é arrendodado até duas casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = pri + " / " + " ( " + seg + " * " + ter + " ) " + " + " + qua; //é mostrado na tela
+            //
+        } else if (operacaoNum == 3) { //se a operação for 3
+            valor = pri - (seg / ter) * qua; //expressão
+            decimal = valor.toFixed(2); //é arrendodado até duas casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = pri + " - " + " ( " + seg + " / " + ter + " ) " + " * " + qua; //é mostrado na tela
+            // 
+        } else {  //se a operação for 4
+            valor = pri + (seg - ter) - qua; //expressão
+            decimal = valor.toFixed(2); //é arrendodado até duas casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = pri + " + " + " ( " + seg + " - " + ter + " ) " + " - " + qua; //é mostrado na tela
+            //
+        }
     } else { //se os pontos forem maiores que 50
-        calculateMImpossivel(100); // randoniza os números de 1 a 100, nível impossivel
+        historico(); // guarda no historico
+        document.getElementById('resultado').value = ""; //limpa o resultado
+        var pri = numeroOperacao(100); //randoniza um número
+        var seg = numeroOperacao(100); //randoniza um número
+        var ter = numeroOperacao(100); //randoniza um número
+        var qua = numeroOperacao(100); //randoniza um número
+        var qui = numeroOperacao(100); //randoniza um número
+        var sex = numeroOperacao(100); //randoniza um número
+        var set = numeroOperacao(100); //randoniza um número
+        var operacaoNum = operacao();
+        if (operacaoNum == 1) { //se a operação for 1
+            valor = (pri * (seg + ter) / qua - qui) + sex / set; //expressão
+            decimal = valor.toFixed(3); //é arrendodado até três casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal 
+            document.getElementById('operacaoJogo').value = " ( " + pri + " * ( " + seg + " + " + ter + " ) / " + qua + " - " + qui + " ) + " + sex + " / " + set; //é mostrado na tela
+            //
+        } else if (operacaoNum == 2) { //se a operação for 2
+            valor = (((pri + seg / ter) * (qua - qui) / sex) + set); //expressão
+            decimal = valor.toFixed(3); //é arrendodado até três casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " + " + seg + " / " + ter + " ) * ( " + qua + " - " + qui + " ) / " + sex + " ) + " + set + " ) "; //é mostrado na tela
+            //
+        } else if (operacaoNum == 3) { //se a operação for 3
+            valor = pri / seg - ter * (qua - qui) * (sex - set); //expressão
+            decimal = valor.toFixed(3); //é arrendodado até três casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = pri + " / " + seg + " - " + ter + " * ( " + qua + " - " + qui + " ) * ( " + sex + " - " + set + " ) "; //é mostrado na tela
+            // 
+        } else { //se a operação for 4
+            valor = (((pri - seg) / (ter * qua)) / qui + sex) * set; //expressão
+            decimal = valor.toFixed(3); //é arrendodado até três casas decimais
+            document.getElementById('comparador').value = decimal; // o comparador possui o valor do decimal
+            document.getElementById('operacaoJogo').value = " ( ( ( " + pri + " - " + seg + " ) / ( " + ter + " * " + qua + " ) ) / " + qui + " + " + sex + ") * " + set; //é mostrado na tela
+            //
+        }
     }
 }
 //
 function historico() { //histórico de cálculos
     sessionStorage.setItem(operacaoJogo.value, operacaoJogo.value); //armazena no sessionStorage a operação do jogo
     sessionStorage.setItem(comparador.value, comparador.value); //armazena no sessionStorage o resultado correto da operação
-
     if (valor == (resultado) || decimal == (resultado)) { //se o valor e o resultado forem iguais (resposta correta)
         var k = document.body.querySelector("#cont11").innerHTML; //chama a coluna
         k = sessionStorage.getItem(operacaoJogo.value); //a coluna passa a ter o valor do sessionStorage
@@ -451,7 +415,7 @@ function cores() {
     document.getElementById("sin").style.background = "#DF0101";
     document.getElementById("tan").style.background = "#DF0101";
 }
-function desativaBtn() {
+function desativaAtivaBtn() {
     document.getElementById("clear").disabled = true;
     document.getElementById("pi").disabled = true;
     document.getElementById("modulo").disabled = true;
@@ -468,4 +432,15 @@ function desativaBtn() {
     document.getElementById("parenD").disabled = true;
     document.getElementById("parenE").disabled = true;
     document.getElementById("maisMenos").disabled = true;
+//
+    document.getElementById('operacaoJogo').style.display = "block"; //aparece o bloco das operações
+    document.getElementById('tabela1').style.display = "block"; // aparece a primeira tabela
+    document.getElementById('tabela2').style.display = "block";//aparece a segunda tabela
+    document.getElementById('voltar').style.display = "block";//aparece o botão de voltar
+    document.getElementById('pontosJogo').style.display = "contents";//aparece o placar de pontos
+    document.getElementById('pontos').style.display = "block";//aparece os pontos
+    document.getElementById('calM').style.display = "none";//desaparece o botão da calculadora 
+    document.getElementById('vida1').style.display = "block";//aparece a vida
+    document.getElementById('vida2').style.display = "block";//aparece a vida
+    document.getElementById('vida3').style.display = "block";//aparece a vida
 }
